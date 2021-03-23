@@ -1,19 +1,23 @@
 FROM ubuntu:18.04
 
-WORKDIR /root
-
-VOLUME ["/root/workdir"]
+RUN useradd -ms /bin/bash user
+VOLUME ["/home/newuser"]
 
 ENV JAVA_VERSION  8.0.282-open
 ENV SCALA_VERSION 2.12.13
 ENV SBT_VERSION   1.4.9
 
-RUN apt-get update
+WORKDIR /root
 
-RUN apt-get -y install \
-    npm \
+RUN apt-get update && apt-get -y install \
+    build-essential \
+    curl \
     openjdk-8-jdk \
-    curl
+  && rm -rf /var/lbi/apt/lists/*
+
+# install newest npm (nodejsc package contains also npm)
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
+    apt install -y nodejs
 
 # install newest sbt
 RUN \
@@ -33,6 +37,9 @@ RUN \
 
 ENV SCALA_HOME=/usr/local/share/scala-$SCALA_VERSION
 ENV PATH="${SCALA_HOME}/bin:${PATH}"
+
+USER user
+WORKDIR /home/newuser
 
 # port for scala play
 EXPOSE 9000
