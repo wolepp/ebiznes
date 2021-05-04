@@ -1,16 +1,74 @@
-
-# Routes
-# This file defines all application routes (Higher priority routes first)
-# ~~~~
-
-# An example controller showing a sample home page
-GET        /                    controllers.HomeController.index
-# An example controller showing how to use dependency injection
-GET        /count               controllers.CountController.count
-# An example controller showing how to write asynchronous code
-GET        /message             controllers.AsyncController.message
+GET           /                            controllers.HomeController.index()
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file        controllers.Assets.versioned(path="/public", file: Asset)
+GET           /assets/*file                controllers.Assets.versioned(path="/public", file: Asset)
 
-      
+# Basket api
+GET           /api/basket                  controllers.BasketController.index()
+GET           /api/basket/:id              controllers.BasketController.get(id: Long)
+POST          /api/basket                  controllers.BasketController.create()
+PUT           /api/basket/:id              controllers.BasketController.update(id: Long)
+DELETE        /api/basket/:id              controllers.BasketController.delete(id: Long)
+
+# Category api
+GET           /api/category                controllers.CategoryController.index()
+GET           /api/category/:id            controllers.CategoryController.get(id: Long)
+POST          /api/category                controllers.CategoryController.create()
+PUT           /api/category/:id            controllers.CategoryController.update(id: Long)
+DELETE        /api/category/:id            controllers.CategoryController.delete(id: Long)
+
+# Delivery api
+GET           /api/delivery                controllers.DeliveryController.index()
+GET           /api/delivery/:id            controllers.DeliveryController.get(id: Long)
+POST          /api/delivery                controllers.DeliveryController.create()
+PUT           /api/delivery/:id            controllers.DeliveryController.update(id: Long)
+DELETE        /api/delivery/:id            controllers.DeliveryController.delete(id: Long)
+
+# Order api
+GET           /api/order                   controllers.OrderController.index()
+GET           /api/order/:id               controllers.OrderController.get(id: Long)
+POST          /api/order                   controllers.OrderController.create()
+PUT           /api/order/:id               controllers.OrderController.update(id: Long)
+DELETE        /api/order/:id               controllers.OrderController.delete(id: Long)
+
+# Payment api
+GET           /api/payment                 controllers.PaymentController.index()
+GET           /api/payment/:id             controllers.PaymentController.get(id: Long)
+POST          /api/payment                 controllers.PaymentController.create()
+PUT           /api/payment/:id             controllers.PaymentController.update(id: Long)
+DELETE        /api/payment/:id             controllers.PaymentController.delete(id: Long)
+
+# Product api
+GET           /api/product                 controllers.ProductController.index()
+GET           /api/product/:id             controllers.ProductController.get(id: Long)
+POST          /api/product                 controllers.ProductController.create()
+PUT           /api/product/:id             controllers.ProductController.update(id: Long)
+DELETE        /api/product/:id             controllers.ProductController.delete(id: Long)
+
+# Return api
+GET           /api/return                  controllers.ReturnController.index()
+GET           /api/return/:id              controllers.ReturnController.get(id: Long)
+POST          /api/return                  controllers.ReturnController.create()
+PUT           /api/return/:id              controllers.ReturnController.update(id: Long)
+DELETE        /api/return/:id              controllers.ReturnController.delete(id: Long)
+
+# Special offer api
+GET           /api/specialoffer            controllers.SpecialOfferController.index()
+GET           /api/specialoffer/:id        controllers.SpecialOfferController.get(id: Long)
+POST          /api/specialoffer            controllers.SpecialOfferController.create()
+PUT           /api/specialoffer/:id        controllers.SpecialOfferController.update(id: Long)
+DELETE        /api/specialoffer/:id        controllers.SpecialOfferController.delete(id: Long)
+
+# User api
+GET           /api/user                    controllers.UserController.index()
+GET           /api/user/:id                controllers.UserController.get(id: Long)
+POST          /api/user                    controllers.UserController.create()
+PUT           /api/user/:id                controllers.UserController.update(id: Long)
+DELETE        /api/user/:id                controllers.UserController.delete(id: Long)
+
+# Wishlist api
+GET           /api/wishlist                controllers.WishlistController.index()
+GET           /api/wishlist/:id            controllers.WishlistController.get(id: Long)
+POST          /api/wishlist                controllers.WishlistController.create()
+PUT           /api/wishlist/:id            controllers.WishlistController.update(id: Long)
+DELETE        /api/wishlist/:id            controllers.WishlistController.delete(id: Long)
