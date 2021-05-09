@@ -1,0 +1,12 @@
+package models
+
+import models.utils.Model
+import play.api.libs.json.{ Json, OFormat }
+
+case class WishlistItem(id: Option[Int], wishlistId: Int, productId: Int) extends Model {
+  override def insertId(id: Int): WishlistItem = this.copy(id = Some(id))
+}
+
+object WishlistItem {
+  implicit val format: OFormat[WishlistItem] = Json.format[WishlistItem]
+}
