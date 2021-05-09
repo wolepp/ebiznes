@@ -5,30 +5,30 @@ import play.api.mvc._
 import javax.inject._
 
 @Singleton
-class BasketController @Inject() (cc: ControllerComponents) extends AbstractController(cc) {
+class CartController @Inject() (cc: ControllerComponents) extends AbstractController(cc) {
 
   def index(): Action[AnyContent] =
     Action {
-      Ok("List of baskets")
+      Ok("List of carts")
     }
 
   def get(id: Long): Action[AnyContent] =
     Action {
-      Ok(s"Basket $id")
+      Ok(s"Cart $id")
     }
 
   def create(): Action[AnyContent] =
     Action {
-      Ok("Basket created")
+      Ok("Cart created")
     }
 
   def update(id: Long): Action[AnyContent] =
     Action {
-      Ok(s"Basket $id updated")
+      Ok(s"Cart $id updated")
     }
 
   def delete(id: Long): Action[AnyContent] =
     Action {
-      Ok(s"Basket $id removed")
+      Ok(s"Cart $id removed")
     }
 }
