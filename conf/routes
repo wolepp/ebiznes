@@ -4,71 +4,71 @@ GET           /                            controllers.HomeController.index()
 GET           /assets/*file                controllers.Assets.versioned(path="/public", file: Asset)
 
 # Basket api
-GET           /api/basket                  controllers.BasketController.index()
-GET           /api/basket/:id              controllers.BasketController.get(id: Long)
-POST          /api/basket                  controllers.BasketController.create()
-PUT           /api/basket/:id              controllers.BasketController.update(id: Long)
-DELETE        /api/basket/:id              controllers.BasketController.delete(id: Long)
+GET           /api/cart                    controllers.CartController.index()
+GET           /api/cart/:id                controllers.CartController.get(id: Int)
+POST          /api/cart                    controllers.CartController.create()
+PUT           /api/cart/:id                controllers.CartController.update(id: Int)
+DELETE        /api/cart/:id                controllers.CartController.delete(id: Int)
 
 # Category api
 GET           /api/category                controllers.CategoryController.index()
-GET           /api/category/:id            controllers.CategoryController.get(id: Long)
+GET           /api/category/:id            controllers.CategoryController.get(id: Int)
 POST          /api/category                controllers.CategoryController.create()
-PUT           /api/category/:id            controllers.CategoryController.update(id: Long)
-DELETE        /api/category/:id            controllers.CategoryController.delete(id: Long)
+PUT           /api/category/:id            controllers.CategoryController.update(id: Int)
+DELETE        /api/category/:id            controllers.CategoryController.delete(id: Int)
 
 # Delivery api
 GET           /api/delivery                controllers.DeliveryController.index()
-GET           /api/delivery/:id            controllers.DeliveryController.get(id: Long)
+GET           /api/delivery/:id            controllers.DeliveryController.get(id: Int)
 POST          /api/delivery                controllers.DeliveryController.create()
-PUT           /api/delivery/:id            controllers.DeliveryController.update(id: Long)
-DELETE        /api/delivery/:id            controllers.DeliveryController.delete(id: Long)
+PUT           /api/delivery/:id            controllers.DeliveryController.update(id: Int)
+DELETE        /api/delivery/:id            controllers.DeliveryController.delete(id: Int)
 
 # Order api
 GET           /api/order                   controllers.OrderController.index()
-GET           /api/order/:id               controllers.OrderController.get(id: Long)
+GET           /api/order/:id               controllers.OrderController.get(id: Int)
 POST          /api/order                   controllers.OrderController.create()
-PUT           /api/order/:id               controllers.OrderController.update(id: Long)
-DELETE        /api/order/:id               controllers.OrderController.delete(id: Long)
+PUT           /api/order/:id               controllers.OrderController.update(id: Int)
+DELETE        /api/order/:id               controllers.OrderController.delete(id: Int)
 
 # Payment api
 GET           /api/payment                 controllers.PaymentController.index()
-GET           /api/payment/:id             controllers.PaymentController.get(id: Long)
+GET           /api/payment/:id             controllers.PaymentController.get(id: Int)
 POST          /api/payment                 controllers.PaymentController.create()
-PUT           /api/payment/:id             controllers.PaymentController.update(id: Long)
-DELETE        /api/payment/:id             controllers.PaymentController.delete(id: Long)
+PUT           /api/payment/:id             controllers.PaymentController.update(id: Int)
+DELETE        /api/payment/:id             controllers.PaymentController.delete(id: Int)
 
 # Product api
 GET           /api/product                 controllers.ProductController.index()
-GET           /api/product/:id             controllers.ProductController.get(id: Long)
+GET           /api/product/:id             controllers.ProductController.get(id: Int)
 POST          /api/product                 controllers.ProductController.create()
-PUT           /api/product/:id             controllers.ProductController.update(id: Long)
-DELETE        /api/product/:id             controllers.ProductController.delete(id: Long)
+PUT           /api/product/:id             controllers.ProductController.update(id: Int)
+DELETE        /api/product/:id             controllers.ProductController.delete(id: Int)
 
 # Return api
 GET           /api/return                  controllers.ReturnController.index()
-GET           /api/return/:id              controllers.ReturnController.get(id: Long)
+GET           /api/return/:id              controllers.ReturnController.get(id: Int)
 POST          /api/return                  controllers.ReturnController.create()
-PUT           /api/return/:id              controllers.ReturnController.update(id: Long)
-DELETE        /api/return/:id              controllers.ReturnController.delete(id: Long)
+PUT           /api/return/:id              controllers.ReturnController.update(id: Int)
+DELETE        /api/return/:id              controllers.ReturnController.delete(id: Int)
 
 # Special offer api
 GET           /api/specialoffer            controllers.SpecialOfferController.index()
-GET           /api/specialoffer/:id        controllers.SpecialOfferController.get(id: Long)
+GET           /api/specialoffer/:id        controllers.SpecialOfferController.get(id: Int)
 POST          /api/specialoffer            controllers.SpecialOfferController.create()
-PUT           /api/specialoffer/:id        controllers.SpecialOfferController.update(id: Long)
-DELETE        /api/specialoffer/:id        controllers.SpecialOfferController.delete(id: Long)
+PUT           /api/specialoffer/:id        controllers.SpecialOfferController.update(id: Int)
+DELETE        /api/specialoffer/:id        controllers.SpecialOfferController.delete(id: Int)
 
 # User api
 GET           /api/user                    controllers.UserController.index()
-GET           /api/user/:id                controllers.UserController.get(id: Long)
+GET           /api/user/:id                controllers.UserController.get(id: Int)
 POST          /api/user                    controllers.UserController.create()
-PUT           /api/user/:id                controllers.UserController.update(id: Long)
-DELETE        /api/user/:id                controllers.UserController.delete(id: Long)
+PUT           /api/user/:id                controllers.UserController.update(id: Int)
+DELETE        /api/user/:id                controllers.UserController.delete(id: Int)
 
 # Wishlist api
 GET           /api/wishlist                controllers.WishlistController.index()
-GET           /api/wishlist/:id            controllers.WishlistController.get(id: Long)
+GET           /api/wishlist/:id            controllers.WishlistController.get(id: Int)
 POST          /api/wishlist                controllers.WishlistController.create()
-PUT           /api/wishlist/:id            controllers.WishlistController.update(id: Long)
-DELETE        /api/wishlist/:id            controllers.WishlistController.delete(id: Long)
+PUT           /api/wishlist/:id            controllers.WishlistController.update(id: Int)
+DELETE        /api/wishlist/:id            controllers.WishlistController.delete(id: Int)
