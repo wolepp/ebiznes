@@ -1,0 +1,23 @@
+@(users: Seq[User])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>user list</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        Użytkownicy:
+        @for(user <- users) {
+            @user.id
+            @user.name
+            @user.email
+            @user.password
+            @user.city
+            @user.address
+            <a href="@controllers.routes.UserController.updateUser(user.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.UserController.deleteUser(user.id.get)">Delete</a>
+            <br>
+            }
+    </body>
+</html>
