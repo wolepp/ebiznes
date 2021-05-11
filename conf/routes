@@ -72,3 +72,13 @@ GET           /api/wishlist/:id            controllers.WishlistController.get(id
 POST          /api/wishlist                controllers.WishlistController.create()
 PUT           /api/wishlist/:id            controllers.WishlistController.update(id: Int)
 DELETE        /api/wishlist/:id            controllers.WishlistController.delete(id: Int)
+
+
+# ================== FORMS
+
+GET           /user/list                   controllers.UserController.listUsers
+GET           /user/create                 controllers.UserController.createUser()
+POST          /user/create                 controllers.UserController.createUserHandler()
+GET           /user/update/:id             controllers.UserController.updateUser(id: Int)
+POST          /user/update/                controllers.UserController.updateUserHandler
+GET           /user/delete/:id             controllers.UserController.deleteUser(id: Int)

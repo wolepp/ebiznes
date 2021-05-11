@@ -20,6 +20,8 @@ abstract class CRUDRepository[M <: Model: ClassTag](dbConfigProvider: DatabaseCo
     def id: Rep[Int] = column[Int]("id", O.PrimaryKey, O.AutoInc)
   }
 
+  val api: Api[_]
+
   class Api[T <: ModelTable](entities: TableQuery[T]) {
 
     def get(id: Int): Future[Option[M]] =
