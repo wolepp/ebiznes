@@ -1,9 +1,10 @@
 package models
 
-import models.utils.Model
+import models.utils.CRUDModel
 import play.api.libs.json.{ Json, OFormat }
 
-case class User(id: Option[Int], name: String, email: String, password: String, city: String, address: String) extends Model {
+case class User(id: Option[Int], name: String, email: String, password: String, city: String, address: String)
+    extends CRUDModel[User] {
   override def insertId(id: Int): User = this.copy(id = Some(id))
 }
 

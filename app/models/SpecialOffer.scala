@@ -1,9 +1,9 @@
 package models
 
-import models.utils.Model
+import models.utils.CRUDModel
 import play.api.libs.json.{ Json, OFormat }
 
-case class SpecialOffer(id: Option[Int], name: String, discount: Double) extends Model {
+case class SpecialOffer(id: Option[Int], name: String, discount: Double) extends CRUDModel[SpecialOffer] {
   override def insertId(id: Int): SpecialOffer = this.copy(id = Some(id))
 }
 

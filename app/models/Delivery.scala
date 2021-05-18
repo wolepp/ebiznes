@@ -1,6 +1,6 @@
 package models
 
-import models.utils.{ Model, TimestampFormat }
+import models.utils.{ CRUDModel, TimestampFormat }
 import play.api.libs.json.{ Json, OFormat }
 
 import java.sql.Timestamp
@@ -11,7 +11,7 @@ case class Delivery(
   status:         Int,
   shippingMethod: Int,
   deliveryDate:   Timestamp = Timestamp.from(Instant.now)
-) extends Model {
+) extends CRUDModel[Delivery] {
   override def insertId(id: Int): Delivery = this.copy(id = Some(id))
 }
 

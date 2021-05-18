@@ -1,12 +1,13 @@
 package models
 
-import models.utils.{ Model, TimestampFormat }
+import models.utils.{ CRUDModel, TimestampFormat }
 import play.api.libs.json.{ Json, OFormat }
 
 import java.sql.Timestamp
 import java.time.Instant
 
-case class Payment(id: Option[Int], status: Int, updatedAt: Timestamp = Timestamp.from(Instant.now)) extends Model {
+case class Payment(id: Option[Int], status: Int, updatedAt: Timestamp = Timestamp.from(Instant.now))
+    extends CRUDModel[Payment] {
   override def insertId(id: Int): Payment = this.copy(id = Some(id))
 }
 
