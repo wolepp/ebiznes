@@ -1,6 +1,6 @@
 package models
 
-import models.utils.Model
+import models.utils.CRUDModel
 import play.api.libs.json.{ Json, OFormat }
 
 case class Order(
@@ -10,7 +10,7 @@ case class Order(
   specialOfferId: Option[Int],
   paymentId:      Option[Int],
   sum:            Double
-) extends Model {
+) extends CRUDModel[Order] {
   override def insertId(id: Int): Order = this.copy(id = Some(id))
 }
 
