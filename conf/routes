@@ -31,6 +31,13 @@ POST          /api/order                   controllers.OrderController.create()
 PUT           /api/order/:id               controllers.OrderController.update(id: Int)
 DELETE        /api/order/:id               controllers.OrderController.delete(id: Int)
 
+# OrderItem api
+GET           /api/orderitem               controllers.OrderItemController.index()
+GET           /api/orderitem/:id           controllers.OrderItemController.get(id: Int)
+POST          /api/orderitem               controllers.OrderItemController.create()
+PUT           /api/orderitem/:id           controllers.OrderItemController.update(id: Int)
+DELETE        /api/orderitem/:id           controllers.OrderItemController.delete(id: Int)
+
 # Payment api
 GET           /api/payment                 controllers.PaymentController.index()
 GET           /api/payment/:id             controllers.PaymentController.get(id: Int)
@@ -65,6 +72,13 @@ GET           /api/user/:id                controllers.UserController.get(id: In
 POST          /api/user                    controllers.UserController.create()
 PUT           /api/user/:id                controllers.UserController.update(id: Int)
 DELETE        /api/user/:id                controllers.UserController.delete(id: Int)
+
+# WishlistItem api
+GET           /api/wishlistitem            controllers.WishlistItemController.index()
+GET           /api/wishlistitem/:id        controllers.WishlistItemController.get(id: Int)
+POST          /api/wishlistitem            controllers.WishlistItemController.create()
+PUT           /api/wishlistitem/:id        controllers.WishlistItemController.update(id: Int)
+DELETE        /api/wishlistitem/:id        controllers.WishlistItemController.delete(id: Int)
 
 # Wishlist api
 GET           /api/wishlist                controllers.WishlistController.index()
