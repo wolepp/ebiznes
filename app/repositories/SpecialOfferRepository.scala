@@ -15,7 +15,7 @@ class SpecialOfferRepository @Inject() (dbConfigProvider: DatabaseConfigProvider
 
   class SpecialOfferTable(tag: Tag) extends ModelTable(tag) {
     def name     = column[String]("name")
-    def discount = column[Double]("status")
+    def discount = column[Double]("discount")
 
     def * = (id.?, name, discount) <> ((SpecialOffer.apply _).tupled, SpecialOffer.unapply)
   }
