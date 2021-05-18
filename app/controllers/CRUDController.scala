@@ -8,13 +8,14 @@ import repositories.CRUDRepository
 import scala.concurrent.{ ExecutionContext, Future }
 
 abstract class CRUDController[M <: CRUDModel[M]](
-  repository:    CRUDRepository[M],
-  indexRedirect: Call,
-  cc:            MessagesControllerComponents
+  cc: MessagesControllerComponents
 )(implicit
   format: OFormat[M],
   ec:     ExecutionContext
 ) extends MessagesAbstractController(cc) {
+
+  val indexRedirect: Call
+  val repository:    CRUDRepository[M]
 
   def index(): Action[AnyContent] =
     Action.async {
