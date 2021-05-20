@@ -23,7 +23,7 @@ class UserController @Inject() (
     mapping(
       "id"       -> optional(number),
       "name"     -> nonEmptyText,
-      "email"    -> nonEmptyText,
+      "email"    -> email,
       "password" -> nonEmptyText,
       "city"     -> nonEmptyText,
       "address"  -> nonEmptyText
