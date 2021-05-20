@@ -5,7 +5,7 @@ CREATE TABLE "cart"
     "id"         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "user_id"    INTEGER NOT NULL,
     "product_id" INTEGER NOT NULL,
-    "discount"   REAL    NOT NULL,
+    "discount"   INTEGER NOT NULL,
     "quantity"   INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES "user" (id)
 );
@@ -42,7 +42,7 @@ CREATE TABLE "order"
     "delivery_id"      INTEGER,
     "special_offer_id" INTEGER,
     "payment_id"       INTEGER,
-    "sum"              REAL    NOT NULL,
+    "sum"              INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES "user" (id),
     FOREIGN KEY (delivery_id) REFERENCES "delivery" (id),
     FOREIGN KEY (special_offer_id) REFERENCES "specialoffer" (id),
@@ -79,7 +79,7 @@ CREATE TABLE "specialoffer"
 (
     "id"       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "name"     VARCHAR NOT NULL,
-    "discount" REAL    NOT NULL
+    "discount" INTEGER NOT NULL
 );
 
 CREATE TABLE "user"

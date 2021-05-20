@@ -20,7 +20,7 @@ class CartRepository @Inject() (
   class CartTable(tag: Tag) extends BaseTable(tag) {
     def userId    = column[Int]("user_id")
     def productId = column[Int]("product_id")
-    def discount  = column[Double]("discount")
+    def discount  = column[Int]("discount")
     def quantity  = column[Int]("quantity")
 
     def user_fk    = foreignKey("user_fk", userId, userRepository.entities)(_.id)

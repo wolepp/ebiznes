@@ -9,7 +9,7 @@ case class Order(
   deliveryId:     Option[Int],
   specialOfferId: Option[Int],
   paymentId:      Option[Int],
-  sum:            Double
+  sum:            Int
 ) extends CRUDModel[Order] {
   override def insertId(id: Int): Order = this.copy(id = Some(id))
 

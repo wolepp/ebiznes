@@ -24,7 +24,7 @@ class OrderRepository @Inject() (
     def deliveryId     = column[Option[Int]]("delivery_id")
     def specialOfferId = column[Option[Int]]("special_offer_id")
     def paymentId      = column[Option[Int]]("payment_id")
-    def sum            = column[Double]("sum")
+    def sum            = column[Int]("sum")
 
     def user_fk         = foreignKey("user_fk", userId, userRepository.entities)(_.id)
     def delivery_fk     = foreignKey("delivery_fk", deliveryId, deliveryRepository.entities)(_.id)
