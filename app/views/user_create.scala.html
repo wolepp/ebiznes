@@ -5,7 +5,7 @@
 
 @flash.get("success").getOrElse("")
 
-@form(controllers.routes.UserController.createUserHandler()) {
+@form(controllers.routes.UserController.formCreateHandler) {
     @helper.CSRF.formField
     @inputText(user("name"))
     @inputText(user("email"))

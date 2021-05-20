@@ -1,0 +1,17 @@
+@import models.Category
+@(id: Int, category: Form[Category])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.CategoryController.formUpdateHandler) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@id" type="hidden" />
+    @inputText(category("name"))
+    @inputText(category("parentCategoryId"))
+
+    <div class="buttons">
+        <input type="submit" value="Update Category"/>
+    </div>
+}

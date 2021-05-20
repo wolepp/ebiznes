@@ -1,0 +1,23 @@
+@(categoriess: Seq[Category])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>category list</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        <a href="@controllers.routes.HomeController.index()">Back to main page</a>
+        <br>
+        <a href="@controllers.routes.CategoryController.formCreate()">Create new category</a>
+        <h1>Categories:</h1>
+        @for(category <- categoriess) {
+            @category.id
+            @category.name
+            @category.parentCategoryId
+            <a href="@controllers.routes.CategoryController.formUpdate(category.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.CategoryController.formDelete(category.id.get)">Delete</a>
+            <br>
+            }
+    </body>
+</html>

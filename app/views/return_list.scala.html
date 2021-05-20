@@ -1,0 +1,24 @@
+@(returns: Seq[Return])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>return list</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        <a href="@controllers.routes.HomeController.index()">Back to main page</a>
+        <br>
+        <a href="@controllers.routes.ReturnController.formCreate()">Create new return</a>
+        <h1>Returns:</h1>
+        @for(areturn <- returns) {
+            @areturn.id
+            @areturn.userId
+            @areturn.orderId
+            @areturn.status
+            <a href="@controllers.routes.ReturnController.formUpdate(areturn.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.ReturnController.formDelete(areturn.id.get)">Delete</a>
+            <br>
+            }
+    </body>
+</html>

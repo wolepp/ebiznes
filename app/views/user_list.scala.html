@@ -7,7 +7,10 @@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
     </head>
     <body>
-        Użytkownicy:
+        <a href="@controllers.routes.HomeController.index()">Back to main page</a>
+        <br>
+        <a href="@controllers.routes.UserController.formCreate()">Create new user</a>
+        <h1>Users:</h1>
         @for(user <- users) {
             @user.id
             @user.name
@@ -15,8 +18,8 @@
             @user.password
             @user.city
             @user.address
-            <a href="@controllers.routes.UserController.updateUser(user.id.getOrElse(-1))">Edit</a>
-            <a href="@controllers.routes.UserController.deleteUser(user.id.get)">Delete</a>
+            <a href="@controllers.routes.UserController.formUpdate(user.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.UserController.formDelete(user.id.get)">Delete</a>
             <br>
             }
     </body>

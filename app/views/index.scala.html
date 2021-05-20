@@ -1,4 +1,4 @@
-@(title: String)
+@(title: String, forms: Seq[FormInfo])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -7,6 +7,12 @@
         <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
     </head>
     <body>
-      Tutaj sklep
+        <h1>Welcome to Shop shop</h1>
+      <h2>Available forms:</h2>
+      <ul>
+        @for(form <- forms) {
+          <li><a href="@form.url">@form.name</a></li>
+        }
+      </ul>
     </body>
 </html>

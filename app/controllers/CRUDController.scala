@@ -1,8 +1,10 @@
 package controllers
 
 import models.utils.CRUDModel
+import play.api.data.Form
 import play.api.libs.json.{ JsValue, Json, OFormat }
 import play.api.mvc._
+import play.twirl.api.Html
 import repositories.CRUDRepository
 
 import scala.concurrent.{ ExecutionContext, Future }
@@ -76,6 +78,88 @@ abstract class CRUDController[M <: CRUDModel[M]](
       repository.api.delete(id).map {
         case 0 => NotFound(Json.obj("error" -> "Not found"))
         case _ => Ok(s"${repository.modelName} $id deleted")
+      }
+    }
+
+  // FORMS
+
+  val form: Form[M]
+
+  val formListRedirect: Call
+
+  def listView(entities: Seq[M]): Html
+
+  def createView(form: Form[M])(implicit request: MessagesRequest[_]): Html
+
+  def updateView(id: Int, form: Form[M])(implicit request: MessagesRequest[_]): Html
+
+  def formList: Action[AnyContent] =
+    Action.async { implicit request =>
+      {
+        repository.api
+          .list()
+          .map(entities => Ok(listView(entities)))
+      }
+    }
+
+  def formCreate(): Action[AnyContent] =
+    Action.async { implicit request =>
+      {
+        val entities = repository.api.list()
+        entities.map(_ => Ok(createView(form)))
+      }
+    }
+
+  def formCreateHandler(): Action[AnyContent] =
+    Action.async { implicit request: MessagesRequest[AnyContent] =>
+      {
+        form
+          .bindFromRequest()
+          .fold(
+            errorForm => {
+              Future.successful(BadRequest(createView(errorForm)))
+            },
+            input => {
+              repository.api
+                .create(input.copyWithoutId)
+                .map(_ => { Redirect(formListRedirect) })
+            }
+          )
+      }
+    }
+
+  def formUpdate(id: Int): Action[AnyContent] =
+    Action.async { implicit request: MessagesRequest[AnyContent] =>
+      {
+        val entity = repository.api.get(id)
+        entity.map(e => {
+          val updateForm = form.fill(e.get)
+          Ok(updateView(id, updateForm))
+        })
+      }
+    }
+
+  def formUpdateHandler(): Action[AnyContent] =
+    Action.async { implicit request: MessagesRequest[AnyContent] =>
+      {
+        form
+          .bindFromRequest()
+          .fold(
+            errorForm => {
+              Future.successful(BadRequest(updateView(-1, errorForm)))
+            },
+            input => {
+              repository.api.update(input).map(_ => Redirect(formListRedirect))
+            }
+          )
+      }
+    }
+
+  def formDelete(id: Int): Action[AnyContent] =
+    Action { implicit request: MessagesRequest[AnyContent] =>
+      {
+        repository.api.delete(id)
+        Redirect(formListRedirect)
       }
     }
 

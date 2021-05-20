@@ -1,0 +1,16 @@
+@import models.Payment
+@(payment: Form[Payment])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.PaymentController.formCreateHandler) {
+    @helper.CSRF.formField
+    @inputText(payment("status"))
+    @inputText(payment("updatedAt"))
+
+    <div class="buttons">
+        <input type="submit" value="Add Payment"/>
+    </div>
+}

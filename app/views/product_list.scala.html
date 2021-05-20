@@ -1,0 +1,24 @@
+@(products: Seq[Product])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>product list</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        <a href="@controllers.routes.HomeController.index()">Back to main page</a>
+        <br>
+        <a href="@controllers.routes.ProductController.formCreate()">Create new product</a>
+        <h1>Products:</h1>
+        @for(product <- products) {
+            @product.id
+            @product.categoryId
+            @product.name
+            @product.description
+            <a href="@controllers.routes.ProductController.formUpdate(product.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.ProductController.formDelete(product.id.get)">Delete</a>
+            <br>
+            }
+    </body>
+</html>

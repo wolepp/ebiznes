@@ -1,0 +1,18 @@
+@import models.Delivery
+@(id: Int, delivery: Form[Delivery])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.DeliveryController.formUpdateHandler) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@id" type="hidden" />
+    @inputText(delivery("status"))
+    @inputText(delivery("shippingMethod"))
+    @inputText(delivery("deliveryDate"))
+
+    <div class="buttons">
+        <input type="submit" value="Update Delivery"/>
+    </div>
+}

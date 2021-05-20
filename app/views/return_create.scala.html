@@ -1,0 +1,17 @@
+@import models.Return
+@(areturn: Form[Return])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.ReturnController.formCreateHandler) {
+    @helper.CSRF.formField
+    @inputText(areturn("userId"))
+    @inputText(areturn("orderId"))
+    @inputText(areturn("status"))
+
+    <div class="buttons">
+        <input type="submit" value="Add Return"/>
+    </div>
+}

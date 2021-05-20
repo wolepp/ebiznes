@@ -1,0 +1,23 @@
+@(wishlistItems: Seq[WishlistItem])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>wishlistItem list</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        <a href="@controllers.routes.HomeController.index()">Back to main page</a>
+        <br>
+        <a href="@controllers.routes.WishlistItemController.formCreate()">Create new wishlist item</a>
+        <h1>Wishlist items:</h1>
+        @for(wishlistItem <- wishlistItems) {
+            @wishlistItem.id
+            @wishlistItem.wishlistId
+            @wishlistItem.productId
+            <a href="@controllers.routes.WishlistItemController.formUpdate(wishlistItem.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.WishlistItemController.formDelete(wishlistItem.id.get)">Delete</a>
+            <br>
+            }
+    </body>
+</html>

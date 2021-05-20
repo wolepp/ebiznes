@@ -1,0 +1,18 @@
+@import models.Cart
+@(cart: Form[Cart])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.CartController.formCreateHandler) {
+    @helper.CSRF.formField
+    @inputText(cart("userId"))
+    @inputText(cart("productId"))
+    @inputText(cart("discount"))
+    @inputText(cart("quantity"))
+
+    <div class="buttons">
+        <input type="submit" value="Add Cart"/>
+    </div>
+}

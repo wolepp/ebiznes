@@ -1,0 +1,23 @@
+@(payments: Seq[Payment])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>payment list</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        <a href="@controllers.routes.HomeController.index()">Back to main page</a>
+        <br>
+        <a href="@controllers.routes.PaymentController.formCreate()">Create new payment</a>
+        <h1>Payments:</h1>
+        @for(payment <- payments) {
+            @payment.id
+            @payment.status
+            @payment.updatedAt
+            <a href="@controllers.routes.PaymentController.formUpdate(payment.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.PaymentController.formDelete(payment.id.get)">Delete</a>
+            <br>
+            }
+    </body>
+</html>

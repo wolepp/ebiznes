@@ -1,0 +1,17 @@
+@import models.Wishlist
+@(id: Int, wishlist: Form[Wishlist])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.WishlistController.formUpdateHandler) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@id" type="hidden" />
+    @inputText(wishlist("userId"))
+    @inputText(wishlist("name"))
+
+    <div class="buttons">
+        <input type="submit" value="Update Wishlist"/>
+    </div>
+}

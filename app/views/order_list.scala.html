@@ -1,0 +1,26 @@
+@(orders: Seq[Order])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>order list</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        <a href="@controllers.routes.HomeController.index()">Back to main page</a>
+        <br>
+        <a href="@controllers.routes.OrderController.formCreate()">Create new order</a>
+        <h1>Orders:</h1>
+        @for(order <- orders) {
+            @order.id
+            @order.userId
+            @order.deliveryId
+            @order.specialOfferId
+            @order.paymentId
+            @order.sum
+            <a href="@controllers.routes.OrderController.formUpdate(order.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.OrderController.formDelete(order.id.get)">Delete</a>
+            <br>
+            }
+    </body>
+</html>

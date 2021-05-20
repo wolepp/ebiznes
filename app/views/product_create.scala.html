@@ -1,0 +1,17 @@
+@import models.Product
+@(product: Form[Product])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.ProductController.formCreateHandler) {
+    @helper.CSRF.formField
+    @inputText(product("categoryId"))
+    @inputText(product("name"))
+    @inputText(product("description"))
+
+    <div class="buttons">
+        <input type="submit" value="Add Product"/>
+    </div>
+}

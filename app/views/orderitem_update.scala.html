@@ -1,0 +1,17 @@
+@import models.OrderItem
+@(id: Int, orderItem: Form[OrderItem])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.OrderItemController.formUpdateHandler) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@id" type="hidden" />
+    @inputText(orderItem("orderId"))
+    @inputText(orderItem("productId"))
+
+    <div class="buttons">
+        <input type="submit" value="Update OrderItem"/>
+    </div>
+}

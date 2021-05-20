@@ -1,0 +1,23 @@
+@(orderItems: Seq[OrderItem])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>orderItem list</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        <a href="@controllers.routes.HomeController.index()">Back to main page</a>
+        <br>
+        <a href="@controllers.routes.OrderItemController.formCreate()">Create new order item</a>
+        <h1>Order items:</h1>
+        @for(orderItem <- orderItems) {
+            @orderItem.id
+            @orderItem.orderId
+            @orderItem.productId
+            <a href="@controllers.routes.OrderItemController.formUpdate(orderItem.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.OrderItemController.formDelete(orderItem.id.get)">Delete</a>
+            <br>
+            }
+    </body>
+</html>

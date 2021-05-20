@@ -1,0 +1,24 @@
+@(deliveries: Seq[Delivery])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>delivery list</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        <a href="@controllers.routes.HomeController.index()">Back to main page</a>
+        <br>
+        <a href="@controllers.routes.DeliveryController.formCreate()">Create new delivery</a>
+        <h1>Deliveries:</h1>
+        @for(delivery <- deliveries) {
+            @delivery.id
+            @delivery.status
+            @delivery.shippingMethod
+            @delivery.deliveryDate
+            <a href="@controllers.routes.DeliveryController.formUpdate(delivery.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.DeliveryController.formDelete(delivery.id.get)">Delete</a>
+            <br>
+            }
+    </body>
+</html>

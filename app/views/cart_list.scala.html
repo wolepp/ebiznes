@@ -1,0 +1,25 @@
+@(carts: Seq[Cart])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>cart list</title>
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+    </head>
+    <body>
+        <a href="@controllers.routes.HomeController.index()">Back to main page</a>
+        <br>
+        <a href="@controllers.routes.CartController.formCreate()">Create new cart</a>
+        <h1>Carts:</h1>
+        @for(cart <- carts) {
+            @cart.id
+            @cart.userId
+            @cart.productId
+            @cart.discount
+            @cart.quantity
+            <a href="@controllers.routes.CartController.formUpdate(cart.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.CartController.formDelete(cart.id.get)">Delete</a>
+            <br>
+            }
+    </body>
+</html>
