@@ -13,6 +13,8 @@ case class Delivery(
   deliveryDate:   Timestamp = Timestamp.from(Instant.now)
 ) extends CRUDModel[Delivery] {
   override def insertId(id: Int): Delivery = this.copy(id = Some(id))
+
+  override def copyWithoutId: Delivery = this.copy(id = None)
 }
 
 object Delivery extends TimestampFormat {

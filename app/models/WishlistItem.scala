@@ -5,6 +5,8 @@ import play.api.libs.json.{ Json, OFormat }
 
 case class WishlistItem(id: Option[Int], wishlistId: Int, productId: Int) extends CRUDModel[WishlistItem] {
   override def insertId(id: Int): WishlistItem = this.copy(id = Some(id))
+
+  override def copyWithoutId: WishlistItem = this.copy(id = None)
 }
 
 object WishlistItem {

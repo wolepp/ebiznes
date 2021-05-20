@@ -12,6 +12,8 @@ case class Order(
   sum:            Double
 ) extends CRUDModel[Order] {
   override def insertId(id: Int): Order = this.copy(id = Some(id))
+
+  override def copyWithoutId: Order = this.copy(id = None)
 }
 
 object Order {
