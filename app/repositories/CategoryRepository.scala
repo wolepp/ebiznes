@@ -13,7 +13,7 @@ class CategoryRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(im
   import dbConfig._
   import profile.api._
 
-  class CategoryTable(tag: Tag) extends ModelTable(tag) {
+  class CategoryTable(tag: Tag) extends BaseTable(tag) {
     def name             = column[String]("name")
     def parentCategoryId = column[Option[Int]]("parent_category_id")
 

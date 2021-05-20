@@ -13,7 +13,7 @@ class UserRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(implic
   import dbConfig._
   import profile.api._
 
-  class UserTable(tag: Tag) extends ModelTable(tag) {
+  class UserTable(tag: Tag) extends BaseTable(tag) {
     def name     = column[String]("name")
     def email    = column[String]("email")
     def password = column[String]("password")

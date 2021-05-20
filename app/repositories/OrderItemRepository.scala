@@ -17,7 +17,7 @@ class OrderItemRepository @Inject() (
   import dbConfig._
   import profile.api._
 
-  class OrderItemTable(tag: Tag) extends ModelTable(tag) {
+  class OrderItemTable(tag: Tag) extends BaseTable(tag) {
     def orderId   = column[Int]("order_id")
     def productId = column[Int]("product_id")
 

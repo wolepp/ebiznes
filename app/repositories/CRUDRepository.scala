@@ -19,13 +19,13 @@ abstract class CRUDRepository[M <: CRUDModel[M]: ClassTag](dbConfigProvider: Dat
   import dbConfig._
   import profile.api._
 
-  abstract class ModelTable(tag: Tag) extends Table[M](tag, modelName.toLowerCase) {
+  abstract class BaseTable(tag: Tag) extends Table[M](tag, modelName.toLowerCase) {
     def id: Rep[Int] = column[Int]("id", O.PrimaryKey, O.AutoInc)
   }
 
   val api: Api[_]
 
-  class Api[T <: ModelTable](entities: TableQuery[T]) {
+  class Api[T <: BaseTable](entities: TableQuery[T]) {
 
     def get(id: Int): Future[Option[M]] =
       db.run {

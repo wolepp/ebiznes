@@ -17,7 +17,7 @@ class ReturnRepository @Inject() (
   import dbConfig._
   import profile.api._
 
-  class ReturnTable(tag: Tag) extends ModelTable(tag) {
+  class ReturnTable(tag: Tag) extends BaseTable(tag) {
     def userId  = column[Int]("user_id")
     def orderId = column[Int]("order_id")
     def status  = column[Int]("status")

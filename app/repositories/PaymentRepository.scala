@@ -14,7 +14,7 @@ class PaymentRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(imp
   import dbConfig._
   import profile.api._
 
-  class PaymentTable(tag: Tag) extends ModelTable(tag) {
+  class PaymentTable(tag: Tag) extends BaseTable(tag) {
     def status    = column[Int]("status")
     def updatedAt = column[Timestamp]("updated_at")
 

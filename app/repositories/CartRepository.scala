@@ -17,7 +17,7 @@ class CartRepository @Inject() (
   import dbConfig._
   import profile.api._
 
-  class CartTable(tag: Tag) extends ModelTable(tag) {
+  class CartTable(tag: Tag) extends BaseTable(tag) {
     def userId    = column[Int]("user_id")
     def productId = column[Int]("product_id")
     def discount  = column[Double]("discount")

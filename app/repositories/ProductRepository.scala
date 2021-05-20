@@ -16,7 +16,7 @@ class ProductRepository @Inject() (
   import dbConfig._
   import profile.api._
 
-  class ProductTable(tag: Tag) extends ModelTable(tag) {
+  class ProductTable(tag: Tag) extends BaseTable(tag) {
     def categoryId  = column[Int]("category_id")
     def name        = column[String]("name")
     def description = column[String]("description")

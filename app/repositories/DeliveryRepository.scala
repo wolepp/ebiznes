@@ -14,7 +14,7 @@ class DeliveryRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(im
   import dbConfig._
   import profile.api._
 
-  class DeliveryTable(tag: Tag) extends ModelTable(tag) {
+  class DeliveryTable(tag: Tag) extends BaseTable(tag) {
     def status         = column[Int]("status")
     def shippingMethod = column[Int]("shipping_method")
     def deliveryDate   = column[Timestamp]("delivery_date")

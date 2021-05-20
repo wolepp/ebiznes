@@ -13,7 +13,7 @@ class SpecialOfferRepository @Inject() (dbConfigProvider: DatabaseConfigProvider
   import dbConfig._
   import profile.api._
 
-  class SpecialOfferTable(tag: Tag) extends ModelTable(tag) {
+  class SpecialOfferTable(tag: Tag) extends BaseTable(tag) {
     def name     = column[String]("name")
     def discount = column[Double]("discount")
 

@@ -17,7 +17,7 @@ class WishlistItemRepository @Inject() (
   import dbConfig._
   import profile.api._
 
-  class WishlistItemTable(tag: Tag) extends ModelTable(tag) {
+  class WishlistItemTable(tag: Tag) extends BaseTable(tag) {
     def wishlistId = column[Int]("wishlist_id")
     def productId  = column[Int]("product_id")
 
