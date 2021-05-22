@@ -44,7 +44,7 @@ abstract class CRUDController[M <: CRUDModel[M]](
         .validate[M]
         .fold(
           _ => {
-            Future(BadRequest("Invalid json content"))
+            Future.successful(BadRequest(Json.obj("error" -> "Invalid json")))
           },
           input => {
             repository.api.create(input).map { _ =>
@@ -77,7 +77,7 @@ abstract class CRUDController[M <: CRUDModel[M]](
     Action.async {
       repository.api.delete(id).map {
         case 0 => NotFound(Json.obj("error" -> "Not found"))
-        case _ => Ok(s"${repository.modelName} $id deleted")
+        case _ => Ok(Json.obj("status" -> s"${repository.modelName} $id deleted"))
       }
     }
 
