@@ -6,44 +6,23 @@ import ProductsForm from "./ProductsForm";
 const PRODUCT_URL = "http://localhost:9000/api/product"
 const CATEGORY_URL = "http://localhost:9000/api/category"
 
-type Product = {
-  id: number
-  categoryId: number
-  name: string
-  description: string
-}
+class Products extends Component {
 
-type Category = {
-  id: number
-  name: string
-  parentCategoryId?: number
-}
-
-type ProductsState = {
-  products: Product[];
-  categories: Map<number, Category>;
-}
-
-interface ProductsProps {
-}
-
-class Products extends Component<ProductsProps, ProductsState> {
-
-  constructor(props: ProductsProps) {
+  constructor(props) {
     super(props);
     this.state = {
       products: [],
-      categories: new Map<number, Category>()
-    };
+      categories: new Map()
+    }
   }
 
-  async getProducts(): Promise<Product[]> {
-    return await sendRequest<Product[]>(PRODUCT_URL, "GET")
+  async getProducts() {
+    return await sendRequest (PRODUCT_URL, "GET");
   }
 
   async getCategories() {
-    let categories = await sendRequest<Category[]>(CATEGORY_URL, "GET");
-    let categoriesMap = new Map<number, Category>();
+    let categories = await sendRequest(CATEGORY_URL, "GET");
+    let categoriesMap = new Map();
     categories.forEach(category => {
       categoriesMap.set(category.id, category);
     })
@@ -57,7 +36,7 @@ class Products extends Component<ProductsProps, ProductsState> {
     this.setState({categories: categories});
   }
 
-  getCategoryName(categoryId: number): string {
+  getCategoryName(categoryId) {
     let category = this.state.categories.get(categoryId);
     return (category) ? category.name : "Brak kategorii"
   }
@@ -69,16 +48,16 @@ class Products extends Component<ProductsProps, ProductsState> {
         <BrowserRouter>
           <Link to={"/productcreate"}>Create new product</Link>
           <Route exact path={"/productcreate"} component={ProductsForm}/>
-        <h2>List of products:</h2>
-        <ul>
-          {this.state.products.map((product, index) => (
-            <div key={index}>
-              <h4>{product.id}: {product.name}</h4>
-              <p>Description: {product.description}</p>
-              <p>Category: {this.getCategoryName(product.categoryId)}</p>
-            </div>
-          ))}
-        </ul>
+          <h2>List of products:</h2>
+          <ul>
+            {this.state.products.map((product, index) => (
+              <div key={index}>
+                <h4>{product.id}: {product.name}</h4>
+                <p>Description: {product.description}</p>
+                <p>Category: {this.getCategoryName(product.categoryId)}</p>
+              </div>
+            ))}
+          </ul>
         </BrowserRouter>
       </div>
     )

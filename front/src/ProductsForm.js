@@ -4,35 +4,8 @@ import sendRequest from "./utils";
 const CATEGORY_URL = "http://localhost:9000/api/category"
 const ADD_PRODUCT_URL = "http://localhost:9000/api/product"
 
-type Product = {
-  categoryId: number
-  name: string
-  description: string
-}
-
-type ProductX = {
-  id: number
-  categoryId: number
-  name: string
-  description: string
-}
-
-type Category = {
-  id: number
-  name: string
-  parentCategoryId?: number
-}
-
-type PFState = {
-  categories: Category[];
-  productData: Product,
-}
-
-interface PFProps {
-}
-
-class ProductsForm extends Component<PFProps, PFState> {
-  constructor(props: PFProps) {
+class ProductsForm extends Component {
+  constructor(props) {
     super(props);
     this.state = {
       categories: [],
@@ -47,7 +20,7 @@ class ProductsForm extends Component<PFProps, PFState> {
   }
 
   async getCategories() {
-    return await sendRequest<Category[]>(CATEGORY_URL, "GET");
+    return await sendRequest(CATEGORY_URL, "GET");
   }
 
   async componentDidMount() {
@@ -55,9 +28,9 @@ class ProductsForm extends Component<PFProps, PFState> {
     this.setState({categories: categories});
   }
 
-  async postRequest(event: { preventDefault: () => void; }) {
+  async postRequest(event) {
     event.preventDefault();
-    sendRequest<Product[]>(ADD_PRODUCT_URL, "POST", this.state.productData);
+    sendRequest(ADD_PRODUCT_URL, "POST", this.state.productData);
   }
 
   render() {

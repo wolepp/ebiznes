@@ -1,17 +1,6 @@
 import {Component} from "react";
 
-type Category = {
-  name: string
-}
-
-type CategoriesState = {
-  products: Category[]
-}
-
-interface CategoriesProps {
-}
-
-class Categories extends Component<CategoriesProps, CategoriesState> {
+class Categories extends Component {
   render() {
     return (
       <div>

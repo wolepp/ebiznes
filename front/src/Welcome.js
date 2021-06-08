@@ -1,14 +1,6 @@
 import React, {Component} from "react";
 
-interface WelcomeProps {
-  text: String
-}
-
-type WelcomeState = {
-  time: Date
-}
-
-class Welcome extends Component<WelcomeProps, WelcomeState> {
+class Welcome extends Component {
   tick() {
     this.setState({
       time: new Date()
