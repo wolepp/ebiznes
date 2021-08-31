@@ -17,7 +17,7 @@ class DeliveryRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(im
   class DeliveryTable(tag: Tag) extends BaseTable(tag) {
     def status         = column[Int]("status")
     def shippingMethod = column[Int]("shipping_method")
-    def deliveryDate   = column[Timestamp]("delivery_date")
+    def deliveryDate   = column[String]("delivery_date")
 
     def * = (id.?, status, shippingMethod, deliveryDate) <> ((Delivery.apply _).tupled, Delivery.unapply)
   }

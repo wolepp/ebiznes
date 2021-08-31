@@ -38,4 +38,7 @@ class CategoryController @Inject() (
 
   def updateView(id: Int, form: Form[Category])(implicit request: MessagesRequest[_]): Html =
     views.html.category_update(id, form)
+
+  def deleteView(id: Int, form: Form[Category])(implicit request: MessagesRequest[_]): Html =
+    views.html.category_delete(id, form)
 }

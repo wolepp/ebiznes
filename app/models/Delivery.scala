@@ -10,7 +10,7 @@ case class Delivery(
   id:             Option[Int],
   status:         Int,
   shippingMethod: Int,
-  deliveryDate:   Timestamp = Timestamp.from(Instant.now)
+  deliveryDate:   String
 ) extends CRUDModel[Delivery] {
   override def insertId(id: Int): Delivery = this.copy(id = Some(id))
 

@@ -1,0 +1,18 @@
+@import models.CartItem
+@(id: Int, cart: Form[CartItem])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.CartItemController.formDeleteHandler) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@id" type="hidden" />
+    @inputText(cart("userId"), Symbol("readonly") -> "readonly")
+    @inputText(cart("productId"), Symbol("readonly") -> "readonly")
+    @inputText(cart("quantity"), Symbol("readonly") -> "readonly")
+
+    <div class="buttons">
+        <input type="submit" value="Delete Cart"/>
+    </div>
+}

@@ -16,6 +16,7 @@
             @product.categoryId
             @product.name
             @product.description
+            @product.price
             <a href="@controllers.routes.ProductController.formUpdate(product.id.getOrElse(-1))">Edit</a>
             <a href="@controllers.routes.ProductController.formDelete(product.id.get)">Delete</a>
             <br>

@@ -22,7 +22,6 @@ class ReturnController @Inject() (
   val form: Form[Return] = Form {
     mapping(
       "id"      -> optional(number),
-      "userId"  -> number,
       "orderId" -> number,
       "status"  -> number
     )(Return.apply)(Return.unapply)
@@ -36,4 +35,7 @@ class ReturnController @Inject() (
 
   def updateView(id: Int, form: Form[Return])(implicit request: MessagesRequest[_]): Html =
     views.html.return_update(id, form)
+
+  def deleteView(id: Int, form: Form[Return])(implicit request: MessagesRequest[_]): Html =
+    views.html.return_delete(id, form)
 }

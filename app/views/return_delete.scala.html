@@ -5,13 +5,13 @@
 
 @flash.get("success").getOrElse("")
 
-@form(controllers.routes.ReturnController.formUpdateHandler) {
+@form(controllers.routes.ReturnController.formDeleteHandler) {
     @helper.CSRF.formField
     <input name="id" id="id" value="@id" type="hidden" />
-    @inputText(areturn("orderId"))
-    @inputText(areturn("status"))
+    @inputText(areturn("orderId"), Symbol("readonly") -> "readonly")
+    @inputText(areturn("status"), Symbol("readonly") -> "readonly")
 
     <div class="buttons">
-        <input type="submit" value="Update Return"/>
+        <input type="submit" value="Delete Return"/>
     </div>
 }

@@ -5,7 +5,8 @@ VOLUME ["/home/newuser"]
 
 ENV JAVA_VERSION  8.0.282-open
 ENV SCALA_VERSION 2.12.13
-ENV SBT_VERSION   1.5.1
+ENV SBT_VERSION   1.5.5
+ENV NODE_VERSION  v16.8.0
 
 WORKDIR /root
 
@@ -15,13 +16,19 @@ RUN apt-get update && apt-get -y install \
     openjdk-8-jdk \
   && rm -rf /var/lbi/apt/lists/*
 
-# install newest npm (nodejsc package contains also npm)
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
-    apt install -y nodejs
+# install nvm for node and npm
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+ENV NVM_DIR=/root/.nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default ${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/${NODE_VERSION}/bin/:${PATH}"
+RUN node --version
+RUN npm --version
 
 # install newest sbt
 RUN \
-    curl -L -o sbt-$SBT_VERSION.deb https://dl.bintray.com/sbt/debian/sbt-$SBT_VERSION.deb && \
+    curl -L -o sbt-$SBT_VERSION.deb https://scala.jfrog.io/artifactory/debian/sbt-{$SBT_VERSION}.deb && \
     dpkg -i sbt-$SBT_VERSION.deb && \
     rm sbt-$SBT_VERSION.deb && \
     apt-get update && \

@@ -1,0 +1,20 @@
+@import models.User
+@(id: Int, user: Form[User])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.UserController.formDeleteHandler) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@id" type="hidden" />
+    @inputText(user("name"), Symbol("readonly") -> "readonly")
+    @inputText(user("email"), Symbol("readonly") -> "readonly")
+    @inputText(user("password"), Symbol("readonly") -> "readonly")
+    @inputText(user("city"), Symbol("readonly") -> "readonly")
+    @inputText(user("address"), Symbol("readonly") -> "readonly")
+
+    <div class="buttons">
+        <input type="submit" value="RemoveUser"/>
+    </div>
+}

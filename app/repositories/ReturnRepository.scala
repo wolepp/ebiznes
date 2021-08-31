@@ -18,14 +18,12 @@ class ReturnRepository @Inject() (
   import profile.api._
 
   class ReturnTable(tag: Tag) extends BaseTable(tag) {
-    def userId  = column[Int]("user_id")
     def orderId = column[Int]("order_id")
     def status  = column[Int]("status")
 
-    def user_fk  = foreignKey("user_fk", userId, userRepository.entities)(_.id)
     def order_fk = foreignKey("order_fk", orderId, orderRepository.entities)(_.id)
 
-    def * = (id.?, userId, orderId, status) <> ((Return.apply _).tupled, Return.unapply)
+    def * = (id.?, orderId, status) <> ((Return.apply _).tupled, Return.unapply)
   }
 
   lazy val entities: TableQuery[ReturnTable] = TableQuery[ReturnTable]

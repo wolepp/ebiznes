@@ -21,12 +21,10 @@ class OrderController @Inject() (
 
   val form: Form[Order] = Form {
     mapping(
-      "id"             -> optional(number),
-      "userId"         -> number,
-      "deliveryId"     -> optional(number),
-      "specialOfferId" -> optional(number),
-      "paymentId"      -> optional(number),
-      "sum"            -> number
+      "id"         -> optional(number),
+      "userId"     -> number,
+      "deliveryId" -> optional(number),
+      "paymentId"  -> optional(number)
     )(Order.apply)(Order.unapply)
   }
 
@@ -38,4 +36,7 @@ class OrderController @Inject() (
 
   def updateView(id: Int, form: Form[Order])(implicit request: MessagesRequest[_]): Html =
     views.html.order_update(id, form)
+
+  def deleteView(id: Int, form: Form[Order])(implicit request: MessagesRequest[_]): Html =
+    views.html.order_delete(id, form)
 }

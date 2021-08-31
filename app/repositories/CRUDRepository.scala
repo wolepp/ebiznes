@@ -6,7 +6,7 @@ import slick.jdbc.JdbcProfile
 
 import scala.concurrent.{ ExecutionContext, Future }
 import scala.language.reflectiveCalls
-import scala.reflect.{ ClassTag, classTag }
+import scala.reflect.ClassTag
 
 abstract class CRUDRepository[M <: CRUDModel[M]: ClassTag](dbConfigProvider: DatabaseConfigProvider)(implicit
   ec: ExecutionContext
@@ -49,17 +49,34 @@ abstract class CRUDRepository[M <: CRUDModel[M]: ClassTag](dbConfigProvider: Dat
       }
     }
 
-    def update(model: M): Future[Int] =
+    def update(model: M): Future[Option[M]] = {
       db.run {
         entities
           .filter(_.id === model.id)
           .update(model)
+          .map {
+            case 0 => None
+            case _ => Some(model)
+          }
       }
+    }
 
-    def delete(id: Int): Future[Int] =
-      db.run {
-        entities.filter(_.id === id).delete
+    def delete(idOpt: Option[Int]): Future[Option[M]] =
+      idOpt match {
+        case Some(id) =>
+          get(id).map(entity => {
+            db.run {
+              entities
+                .filter(_.id === id)
+                .delete
+                .map {
+                  case 0 => None
+                  case _ => Some()
+                }
+            }
+            entity
+          })
+        case None => Future { None }
       }
-
   }
 }

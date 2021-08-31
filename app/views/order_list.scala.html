@@ -15,9 +15,7 @@
             @order.id
             @order.userId
             @order.deliveryId
-            @order.specialOfferId
             @order.paymentId
-            @order.sum
             <a href="@controllers.routes.OrderController.formUpdate(order.id.getOrElse(-1))">Edit</a>
             <a href="@controllers.routes.OrderController.formDelete(order.id.get)">Delete</a>
             <br>

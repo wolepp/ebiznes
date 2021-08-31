@@ -1,0 +1,19 @@
+@import models.Product
+@(id: Int, product: Form[Product])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.ProductController.formDeleteHandler) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@id" type="hidden" />
+    @inputText(product("categoryId"), Symbol("readonly") -> "readonly")
+    @inputText(product("name"), Symbol("readonly") -> "readonly")
+    @inputText(product("description"), Symbol("readonly") -> "readonly")
+    @inputText(product("price"), Symbol("readonly") -> "readonly")
+
+    <div class="buttons">
+        <input type="submit" value="Delete Product"/>
+    </div>
+}

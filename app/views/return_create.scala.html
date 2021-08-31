@@ -7,7 +7,6 @@
 
 @form(controllers.routes.ReturnController.formCreateHandler) {
     @helper.CSRF.formField
-    @inputText(areturn("userId"))
     @inputText(areturn("orderId"))
     @inputText(areturn("status"))
 

@@ -1,4 +1,4 @@
-@(carts: Seq[Cart])
+@(carts: Seq[CartItem])
 
 <!DOCTYPE html>
 <html lang="en">
@@ -9,16 +9,15 @@
     <body>
         <a href="@controllers.routes.HomeController.index()">Back to main page</a>
         <br>
-        <a href="@controllers.routes.CartController.formCreate()">Create new cart</a>
+        <a href="@controllers.routes.CartItemController.formCreate()">Create new cart</a>
         <h1>Carts:</h1>
         @for(cart <- carts) {
             @cart.id
             @cart.userId
             @cart.productId
-            @cart.discount
             @cart.quantity
-            <a href="@controllers.routes.CartController.formUpdate(cart.id.getOrElse(-1))">Edit</a>
-            <a href="@controllers.routes.CartController.formDelete(cart.id.get)">Delete</a>
+            <a href="@controllers.routes.CartItemController.formUpdate(cart.id.getOrElse(-1))">Edit</a>
+            <a href="@controllers.routes.CartItemController.formDelete(cart.id.get)">Delete</a>
             <br>
             }
     </body>

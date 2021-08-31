@@ -20,10 +20,11 @@ class ProductRepository @Inject() (
     def categoryId  = column[Int]("category_id")
     def name        = column[String]("name")
     def description = column[String]("description")
+    def price       = column[Int]("price")
 
     def category_fk = foreignKey("category_fk", categoryId, categoryRepository.entities)(_.id)
 
-    def * = (id.?, categoryId, name, description) <> ((Product.apply _).tupled, Product.unapply)
+    def * = (id.?, categoryId, name, description, price) <> ((Product.apply _).tupled, Product.unapply)
   }
 
   lazy val entities: TableQuery[ProductTable] = TableQuery[ProductTable]

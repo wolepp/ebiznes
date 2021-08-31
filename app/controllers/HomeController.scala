@@ -12,7 +12,7 @@ import javax.inject._
 class HomeController @Inject() (cc: ControllerComponents) extends AbstractController(cc) {
 
   val forms = List(
-    FormInfo("Carts", routes.CartController.formList()),
+    FormInfo("Cart items", routes.CartItemController.formList()),
     FormInfo("Categories", routes.CategoryController.formList()),
     FormInfo("Deliveries", routes.DeliveryController.formList()),
     FormInfo("Orders", routes.OrderController.formList()),
@@ -20,7 +20,6 @@ class HomeController @Inject() (cc: ControllerComponents) extends AbstractContro
     FormInfo("Payments", routes.PaymentController.formList()),
     FormInfo("Products", routes.ProductController.formList()),
     FormInfo("Returns", routes.ReturnController.formList()),
-    FormInfo("Special offers", routes.SpecialOfferController.formList()),
     FormInfo("Users", routes.UserController.formList()),
     FormInfo("Wishlists", routes.WishlistController.formList()),
     FormInfo("Wishlist items", routes.WishlistItemController.formList())

@@ -2,7 +2,7 @@ package controllers
 
 import models.Delivery
 import play.api.data.Form
-import play.api.data.Forms.{ mapping, number, optional, sqlTimestamp }
+import play.api.data.Forms.{ mapping, nonEmptyText, number, optional }
 import play.api.mvc._
 import play.twirl.api.Html
 import repositories.{ CRUDRepository, DeliveryRepository }
@@ -24,7 +24,7 @@ class DeliveryController @Inject() (
       "id"             -> optional(number),
       "status"         -> number,
       "shippingMethod" -> number,
-      "deliveryDate"   -> sqlTimestamp
+      "deliveryDate"   -> nonEmptyText
     )(Delivery.apply)(Delivery.unapply)
   }
 
@@ -36,4 +36,7 @@ class DeliveryController @Inject() (
 
   def updateView(id: Int, form: Form[Delivery])(implicit request: MessagesRequest[_]): Html =
     views.html.delivery_update(id, form)
+
+  def deleteView(id: Int, form: Form[Delivery])(implicit request: MessagesRequest[_]): Html =
+    views.html.delivery_delete(id, form)
 }

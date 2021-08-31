@@ -35,4 +35,7 @@ class WishlistItemController @Inject() (
 
   def updateView(id: Int, form: Form[WishlistItem])(implicit request: MessagesRequest[_]): Html =
     views.html.wishlistitem_update(id, form)
+
+  def deleteView(id: Int, form: Form[WishlistItem])(implicit request: MessagesRequest[_]): Html =
+    views.html.wishlistitem_delete(id, form)
 }

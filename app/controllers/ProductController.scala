@@ -24,7 +24,8 @@ class ProductController @Inject() (
       "id"          -> optional(number),
       "categoryId"  -> number,
       "name"        -> nonEmptyText,
-      "description" -> nonEmptyText
+      "description" -> nonEmptyText,
+      "price"       -> number
     )(Product.apply)(Product.unapply)
   }
 
@@ -36,4 +37,7 @@ class ProductController @Inject() (
 
   def updateView(id: Int, form: Form[Product])(implicit request: MessagesRequest[_]): Html =
     views.html.product_update(id, form)
+
+  def deleteView(id: Int, form: Form[Product])(implicit request: MessagesRequest[_]): Html =
+    views.html.product_delete(id, form)
 }

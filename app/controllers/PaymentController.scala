@@ -35,4 +35,7 @@ class PaymentController @Inject() (
 
   def updateView(id: Int, form: Form[Payment])(implicit request: MessagesRequest[_]): Html =
     views.html.payment_update(id, form)
+
+  def deleteView(id: Int, form: Form[Payment])(implicit request: MessagesRequest[_]): Html =
+    views.html.payment_delete(id, form)
 }

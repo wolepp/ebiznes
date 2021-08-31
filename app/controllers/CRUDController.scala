@@ -75,9 +75,9 @@ abstract class CRUDController[M <: CRUDModel[M]](
 
   def delete(id: Int): Action[AnyContent] =
     Action.async {
-      repository.api.delete(id).map {
-        case 0 => NotFound(Json.obj("error" -> "Not found"))
-        case _ => Ok(Json.obj("status" -> s"${repository.modelName} $id deleted"))
+      repository.api.delete(Some(id)).map {
+        case None   => NotFound(Json.obj("error" -> "Not found"))
+        case entity => Ok(Json.toJson(entity))
       }
     }
 
@@ -92,6 +92,8 @@ abstract class CRUDController[M <: CRUDModel[M]](
   def createView(form: Form[M])(implicit request: MessagesRequest[_]): Html
 
   def updateView(id: Int, form: Form[M])(implicit request: MessagesRequest[_]): Html
+
+  def deleteView(id: Int, form: Form[M])(implicit request: MessagesRequest[_]): Html
 
   def formList: Action[AnyContent] =
     Action.async { implicit request =>
@@ -156,10 +158,29 @@ abstract class CRUDController[M <: CRUDModel[M]](
     }
 
   def formDelete(id: Int): Action[AnyContent] =
-    Action { implicit request: MessagesRequest[AnyContent] =>
+    Action.async { implicit request: MessagesRequest[AnyContent] =>
       {
-        repository.api.delete(id)
-        Redirect(formListRedirect)
+        val entity = repository.api.get(id)
+        entity.map(e => {
+          val deleteForm = form.fill(e.get)
+          Ok(deleteView(id, deleteForm))
+        })
+      }
+    }
+
+  def formDeleteHandler(): Action[AnyContent] =
+    Action.async { implicit request: MessagesRequest[AnyContent] =>
+      {
+        form
+          .bindFromRequest()
+          .fold(
+            errorForm => {
+              Future.successful(BadRequest(deleteView(-1, errorForm)))
+            },
+            input => {
+              repository.api.delete(input.id).map(_ => Redirect(formListRedirect))
+            }
+          )
       }
     }
 

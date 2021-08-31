@@ -2,7 +2,7 @@ package controllers
 
 import models.Wishlist
 import play.api.data.Form
-import play.api.data.Forms.{ mapping, nonEmptyText, number, optional }
+import play.api.data.Forms.{ mapping, number, optional, text }
 import play.api.mvc._
 import play.twirl.api.Html
 import repositories.{ CRUDRepository, WishlistRepository }
@@ -23,7 +23,7 @@ class WishlistController @Inject() (
     mapping(
       "id"     -> optional(number),
       "userId" -> number,
-      "name"   -> nonEmptyText
+      "name"   -> optional(text)
     )(Wishlist.apply)(Wishlist.unapply)
   }
 
@@ -35,4 +35,7 @@ class WishlistController @Inject() (
 
   def updateView(id: Int, form: Form[Wishlist])(implicit request: MessagesRequest[_]): Html =
     views.html.wishlist_update(id, form)
+
+  def deleteView(id: Int, form: Form[Wishlist])(implicit request: MessagesRequest[_]): Html =
+    views.html.wishlist_delete(id, form)
 }

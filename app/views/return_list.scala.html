@@ -13,7 +13,6 @@
         <h1>Returns:</h1>
         @for(areturn <- returns) {
             @areturn.id
-            @areturn.userId
             @areturn.orderId
             @areturn.status
             <a href="@controllers.routes.ReturnController.formUpdate(areturn.id.getOrElse(-1))">Edit</a>

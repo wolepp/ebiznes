@@ -39,4 +39,7 @@ class UserController @Inject() (
 
   def updateView(id: Int, form: Form[User])(implicit request: MessagesRequest[_]): Html =
     views.html.user_update(id, form)
+
+  def deleteView(id: Int, form: Form[User])(implicit request: MessagesRequest[_]): Html =
+    views.html.user_delete(id, form)
 }

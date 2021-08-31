@@ -4,11 +4,11 @@ GET           /                               controllers.HomeController.index()
 GET           /assets/*file                   controllers.Assets.versioned(path="/public", file: Asset)
 
 # Cart api
-GET           /api/cart                       controllers.CartController.index()
-GET           /api/cart/:id                   controllers.CartController.get(id: Int)
-POST          /api/cart                       controllers.CartController.create()
-PUT           /api/cart/:id                   controllers.CartController.update(id: Int)
-DELETE        /api/cart/:id                   controllers.CartController.delete(id: Int)
+GET           /api/cartitem                   controllers.CartItemController.index()
+GET           /api/cartitem/:id               controllers.CartItemController.get(id: Int)
+POST          /api/cartitem                   controllers.CartItemController.create()
+PUT           /api/cartitem/:id               controllers.CartItemController.update(id: Int)
+DELETE        /api/cartitem/:id               controllers.CartItemController.delete(id: Int)
 
 # Category api
 GET           /api/category                   controllers.CategoryController.index()
@@ -59,13 +59,6 @@ POST          /api/return                     controllers.ReturnController.creat
 PUT           /api/return/:id                 controllers.ReturnController.update(id: Int)
 DELETE        /api/return/:id                 controllers.ReturnController.delete(id: Int)
 
-# Special offer api
-GET           /api/specialoffer               controllers.SpecialOfferController.index()
-GET           /api/specialoffer/:id           controllers.SpecialOfferController.get(id: Int)
-POST          /api/specialoffer               controllers.SpecialOfferController.create()
-PUT           /api/specialoffer/:id           controllers.SpecialOfferController.update(id: Int)
-DELETE        /api/specialoffer/:id           controllers.SpecialOfferController.delete(id: Int)
-
 # User api
 GET           /api/user                       controllers.UserController.index()
 GET           /api/user/:id                   controllers.UserController.get(id: Int)
@@ -91,12 +84,13 @@ DELETE        /api/wishlist/:id               controllers.WishlistController.del
 # ================== FORMS
 
 # Cart forms
-GET           /cart/list                      controllers.CartController.formList()
-GET           /cart/create                    controllers.CartController.formCreate()
-POST          /cart/create                    controllers.CartController.formCreateHandler()
-GET           /cart/update/:id                controllers.CartController.formUpdate(id: Int)
-POST          /cart/update/                   controllers.CartController.formUpdateHandler()
-GET           /cart/delete/:id                controllers.CartController.formDelete(id: Int)
+GET           /cartitem/list                  controllers.CartItemController.formList()
+GET           /cartitem/create                controllers.CartItemController.formCreate()
+POST          /cartitem/create                controllers.CartItemController.formCreateHandler()
+GET           /cartitem/update/:id            controllers.CartItemController.formUpdate(id: Int)
+POST          /cartitem/update/               controllers.CartItemController.formUpdateHandler()
+GET           /cartitem/delete/:id            controllers.CartItemController.formDelete(id: Int)
+POST          /cartitem/delete/               controllers.CartItemController.formDeleteHandler()
 
 # Category forms
 
@@ -106,6 +100,7 @@ POST          /category/create                controllers.CategoryController.for
 GET           /category/update/:id            controllers.CategoryController.formUpdate(id: Int)
 POST          /category/update/               controllers.CategoryController.formUpdateHandler()
 GET           /category/delete/:id            controllers.CategoryController.formDelete(id: Int)
+POST          /category/delete/               controllers.CategoryController.formDeleteHandler()
 
 # Delivery forms
 
@@ -115,6 +110,7 @@ POST          /delivery/create                controllers.DeliveryController.for
 GET           /delivery/update/:id            controllers.DeliveryController.formUpdate(id: Int)
 POST          /delivery/update/               controllers.DeliveryController.formUpdateHandler()
 GET           /delivery/delete/:id            controllers.DeliveryController.formDelete(id: Int)
+POST          /delivery/delete/               controllers.DeliveryController.formDeleteHandler()
 
 # Order forms
 
@@ -124,6 +120,7 @@ POST          /order/create                   controllers.OrderController.formCr
 GET           /order/update/:id               controllers.OrderController.formUpdate(id: Int)
 POST          /order/update/                  controllers.OrderController.formUpdateHandler()
 GET           /order/delete/:id               controllers.OrderController.formDelete(id: Int)
+POST          /order/delete/                  controllers.OrderController.formDeleteHandler()
 
 # OrderItem forms
 
@@ -133,6 +130,7 @@ POST          /orderitem/create               controllers.OrderItemController.fo
 GET           /orderitem/update/:id           controllers.OrderItemController.formUpdate(id: Int)
 POST          /orderitem/update/              controllers.OrderItemController.formUpdateHandler()
 GET           /orderitem/delete/:id           controllers.OrderItemController.formDelete(id: Int)
+POST          /orderitem/delete/              controllers.OrderItemController.formDeleteHandler()
 
 # Payment forms
 
@@ -142,6 +140,7 @@ POST          /payment/create                 controllers.PaymentController.form
 GET           /payment/update/:id             controllers.PaymentController.formUpdate(id: Int)
 POST          /payment/update/                controllers.PaymentController.formUpdateHandler()
 GET           /payment/delete/:id             controllers.PaymentController.formDelete(id: Int)
+POST          /payment/delete/                controllers.PaymentController.formDeleteHandler()
 
 # Product forms
 
@@ -151,6 +150,7 @@ POST          /product/create                 controllers.ProductController.form
 GET           /product/update/:id             controllers.ProductController.formUpdate(id: Int)
 POST          /product/update/                controllers.ProductController.formUpdateHandler()
 GET           /product/delete/:id             controllers.ProductController.formDelete(id: Int)
+POST          /product/delete/                controllers.ProductController.formDeleteHandler()
 
 # Return forms
 
@@ -160,15 +160,7 @@ POST          /return/create                  controllers.ReturnController.formC
 GET           /return/update/:id              controllers.ReturnController.formUpdate(id: Int)
 POST          /return/update/                 controllers.ReturnController.formUpdateHandler()
 GET           /return/delete/:id              controllers.ReturnController.formDelete(id: Int)
-
-# Special offer forms
-
-GET           /specialoffer/list              controllers.SpecialOfferController.formList()
-GET           /specialoffer/create            controllers.SpecialOfferController.formCreate()
-POST          /specialoffer/create            controllers.SpecialOfferController.formCreateHandler()
-GET           /specialoffer/update/:id        controllers.SpecialOfferController.formUpdate(id: Int)
-POST          /specialoffer/update/           controllers.SpecialOfferController.formUpdateHandler()
-GET           /specialoffer/delete/:id        controllers.SpecialOfferController.formDelete(id: Int)
+POST          /return/delete/                 controllers.ReturnController.formDeleteHandler()
 
 # User forms
 
@@ -178,6 +170,7 @@ POST          /user/create                    controllers.UserController.formCre
 GET           /user/update/:id                controllers.UserController.formUpdate(id: Int)
 POST          /user/update/                   controllers.UserController.formUpdateHandler()
 GET           /user/delete/:id                controllers.UserController.formDelete(id: Int)
+POST          /user/delete/                   controllers.UserController.formDeleteHandler()
 
 # WishlistItem forms
 
@@ -187,6 +180,7 @@ POST          /wishlistitem/create            controllers.WishlistItemController
 GET           /wishlistitem/update/:id        controllers.WishlistItemController.formUpdate(id: Int)
 POST          /wishlistitem/update/           controllers.WishlistItemController.formUpdateHandler()
 GET           /wishlistitem/delete/:id        controllers.WishlistItemController.formDelete(id: Int)
+POST          /wishlistitem/delete/           controllers.WishlistItemController.formDeleteHandler()
 
 # Wishlist forms
 
@@ -196,3 +190,4 @@ POST          /wishlist/create                controllers.WishlistController.for
 GET           /wishlist/update/:id            controllers.WishlistController.formUpdate(id: Int)
 POST          /wishlist/update/               controllers.WishlistController.formUpdateHandler()
 GET           /wishlist/delete/:id            controllers.WishlistController.formDelete(id: Int)
+POST          /wishlist/delete/               controllers.WishlistController.formDeleteHandler()

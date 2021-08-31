@@ -1,0 +1,17 @@
+@import models.Category
+@(id: Int, category: Form[Category])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.CategoryController.formDeleteHandler) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@id" type="hidden" />
+    @inputText(category("name"), Symbol("readonly") -> "readonly")
+    @inputText(category("parentCategoryId"), Symbol("disabled") -> "")
+
+    <div class="buttons">
+        <input type="submit" value="RemoveCategory"/>
+    </div>
+}

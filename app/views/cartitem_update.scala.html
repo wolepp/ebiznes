@@ -1,16 +1,15 @@
-@import models.Cart
-@(id: Int, cart: Form[Cart])(implicit request: MessagesRequestHeader, flash: Flash)
+@import models.CartItem
+@(id: Int, cart: Form[CartItem])(implicit request: MessagesRequestHeader, flash: Flash)
 
 @import helper._
 
 @flash.get("success").getOrElse("")
 
-@form(controllers.routes.CartController.formUpdateHandler) {
+@form(controllers.routes.CartItemController.formUpdateHandler) {
     @helper.CSRF.formField
     <input name="id" id="id" value="@id" type="hidden" />
     @inputText(cart("userId"))
     @inputText(cart("productId"))
-    @inputText(cart("discount"))
     @inputText(cart("quantity"))
 
     <div class="buttons">

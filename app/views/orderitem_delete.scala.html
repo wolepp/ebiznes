@@ -1,0 +1,17 @@
+@import models.OrderItem
+@(id: Int, orderItem: Form[OrderItem])(implicit request: MessagesRequestHeader, flash: Flash)
+
+@import helper._
+
+@flash.get("success").getOrElse("")
+
+@form(controllers.routes.OrderItemController.formDeleteHandler) {
+    @helper.CSRF.formField
+    <input name="id" id="id" value="@id" type="hidden" />
+    @inputText(orderItem("orderId"), Symbol("readonly") -> "readonly")
+    @inputText(orderItem("productId"), Symbol("readonly") -> "readonly")
+
+    <div class="buttons">
+        <input type="submit" value="RemoveOrderItem"/>
+    </div>
+}

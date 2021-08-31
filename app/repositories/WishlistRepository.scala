@@ -19,7 +19,7 @@ class WishlistRepository @Inject() (
 
   class WishlistTable(tag: Tag) extends BaseTable(tag) {
     def userId = column[Int]("user_id")
-    def name   = column[String]("name")
+    def name   = column[Option[String]]("name")
 
     def user_fk = foreignKey("user_fk", userId, userRepository.entities)(_.id)
 

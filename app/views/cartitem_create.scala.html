@@ -1,15 +1,14 @@
-@import models.Cart
-@(cart: Form[Cart])(implicit request: MessagesRequestHeader, flash: Flash)
+@import models.CartItem
+@(cart: Form[CartItem])(implicit request: MessagesRequestHeader, flash: Flash)
 
 @import helper._
 
 @flash.get("success").getOrElse("")
 
-@form(controllers.routes.CartController.formCreateHandler) {
+@form(controllers.routes.CartItemController.formCreateHandler) {
     @helper.CSRF.formField
     @inputText(cart("userId"))
     @inputText(cart("productId"))
-    @inputText(cart("discount"))
     @inputText(cart("quantity"))
 
     <div class="buttons">

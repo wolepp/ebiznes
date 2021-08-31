@@ -1,11 +1,10 @@
 -- !Ups
 
-CREATE TABLE "cart"
+CREATE TABLE "cartitem"
 (
     "id"         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "user_id"    INTEGER NOT NULL,
     "product_id" INTEGER NOT NULL,
-    "discount"   INTEGER NOT NULL,
     "quantity"   INTEGER NOT NULL,
     FOREIGN KEY (user_id) REFERENCES "user" (id)
 );
@@ -37,15 +36,12 @@ CREATE TABLE "orderitem"
 
 CREATE TABLE "order"
 (
-    "id"               INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "user_id"          INTEGER,
-    "delivery_id"      INTEGER,
-    "special_offer_id" INTEGER,
-    "payment_id"       INTEGER,
-    "sum"              INTEGER NOT NULL,
+    "id"          INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "user_id"     INTEGER NOT NULL,
+    "delivery_id" INTEGER,
+    "payment_id"  INTEGER,
     FOREIGN KEY (user_id) REFERENCES "user" (id),
     FOREIGN KEY (delivery_id) REFERENCES "delivery" (id),
-    FOREIGN KEY (special_offer_id) REFERENCES "specialoffer" (id),
     FOREIGN KEY (payment_id) REFERENCES "payment" (id)
 );
 
@@ -62,24 +58,16 @@ CREATE TABLE "product"
     "category_id" INTEGER NOT NULL,
     "name"        VARCHAR NOT NULL,
     "description" VARCHAR NOT NULL,
+    "price"       INTEGER NOT NULL,
     FOREIGN KEY (category_id) REFERENCES "category" (id)
 );
 
 CREATE TABLE "return"
 (
     "id"       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "user_id"  INTEGER NOT NULL,
     "order_id" INTEGER NOT NULL,
     "status"   INTEGER NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES "user" (id),
     FOREIGN KEY (order_id) REFERENCES "order" (id)
-);
-
-CREATE TABLE "specialoffer"
-(
-    "id"       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "name"     VARCHAR NOT NULL,
-    "discount" INTEGER NOT NULL
 );
 
 CREATE TABLE "user"
@@ -105,13 +93,13 @@ CREATE TABLE "wishlist"
 (
     "id"      INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "user_id" INTEGER NOT NULL,
-    "name"    VARCHAR NOT NULL,
+    "name"    VARCHAR,
     FOREIGN KEY ("user_id") REFERENCES "user" (id)
 );
 
 -- !Downs
 
-DROP TABLE "cart";
+DROP TABLE "cartitem";
 DROP TABLE "category";
 DROP TABLE "delivery";
 DROP TABLE "orderitem";
@@ -119,7 +107,6 @@ DROP TABLE "order";
 DROP TABLE "payment";
 DROP TABLE "product";
 DROP TABLE "return";
-DROP TABLE "specialoffer";
 DROP TABLE "user";
 DROP TABLE "wishlistitem";
 DROP TABLE "wishlist";
