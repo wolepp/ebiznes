@@ -1,4 +1,6 @@
 import { Redirect, Route, Switch } from "react-router-dom";
+import SignUp from "./SignUp";
+import { Col } from "react-bootstrap";
 
 const Routes = () => (
   <Switch>
@@ -16,7 +18,12 @@ const Routes = () => (
     </Route>
 
     <Route path='/auth/signup'>
-      <p>Sign up component placeholder</p>
+      <Col
+        md={{ span: 8, offset: 2 }}
+        lg={{ span: 6, offset: 3 }}
+        className='my-4'>
+        <SignUp />
+      </Col>
     </Route>
 
     <Route path='/cart'>
