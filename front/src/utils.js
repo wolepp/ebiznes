@@ -1,7 +1,7 @@
 import ky from "ky";
 
 async function sendRequest(url, method, data) {
-  switch (method) {
+  switch (method.toUpperCase()) {
   case "GET":
     return await ky.get(url).json();
   case "POST":

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router } from "react-router-dom";
-import MyNavbar from "./MyNavbar";
+import MyNavbar from "./Components/MyNavbar";
 import Routes from "./Routes";
 import { Container, Row } from "react-bootstrap";
 
