@@ -1,7 +1,15 @@
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { storeContext } from "../storeContext";
+import { useContext } from "react";
 
 const MyNavbar = () => {
+  const store = useContext(storeContext);
+
+  const increment = () => {
+    store.dispatch({ type: 'increment' });
+  }
+
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
       <Container>
@@ -11,6 +19,7 @@ const MyNavbar = () => {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
             <Nav.Link as={Link} to="/wishlists">Wishlists</Nav.Link>
+            <Nav.Link onClick={increment}>{store.state.count}</Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link as={Link} to="/auth/login">Log in</Nav.Link>

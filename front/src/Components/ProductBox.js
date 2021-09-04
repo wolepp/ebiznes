@@ -12,7 +12,7 @@ const ProductBox = ({ product }) => {
           <Container className='p-0'>
             <Row className='mt-3 p-0'>
 
-              <Col sm={{ span: 4, offset: 0  }} className='px-4'>
+              <Col sm={{ span: 4, offset: 0 }} className='px-4'>
                 <h3>{product.name}</h3>
               </Col>
 
