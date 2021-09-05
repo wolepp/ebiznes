@@ -6,6 +6,8 @@ import { useContext } from "react";
 const MyNavbar = () => {
   const store = useContext(storeContext);
 
+  const { count } = store.state;
+
   const increment = () => {
     store.dispatch({ type: 'increment' });
   }
@@ -19,7 +21,7 @@ const MyNavbar = () => {
           <Nav className="me-auto">
             <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
             <Nav.Link as={Link} to="/wishlists">Wishlists</Nav.Link>
-            <Nav.Link onClick={increment}>{store.state.count}</Nav.Link>
+            <Nav.Link onClick={increment}>{count}</Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link as={Link} to="/auth/login">Log in</Nav.Link>

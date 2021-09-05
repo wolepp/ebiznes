@@ -3,6 +3,10 @@ import SignUp from "./Components/SignUp";
 import { Col } from "react-bootstrap";
 import Login from "./Components/Login";
 import Products from "./Components/Products";
+import Account from "./Components/Account";
+import Orders from "./Components/Orders";
+import Returns from "./Components/Returns";
+import Cart from "./Components/Cart";
 
 const Routes = () => (
   <Switch>
@@ -34,7 +38,12 @@ const Routes = () => (
     </Route>
 
     <Route path='/cart'>
-      <p>Cart component placeholder</p>
+      <Col
+        xl={{ span: 8, offset: 2 }}
+        className='my-4'
+      >
+        <Cart />
+      </Col>
     </Route>
 
     <Route path='/wishlists'>
@@ -42,7 +51,12 @@ const Routes = () => (
     </Route>
 
     <Route path='/account'>
-      <p>Account component placeholder</p>
+      <Col
+        xl={{ span: 8, offset: 2 }}
+        className='my-4'
+      >
+        <Account />
+      </Col>
     </Route>
 
     <Route path='/product/:id'>
@@ -59,11 +73,21 @@ const Routes = () => (
     </Route>
 
     <Route path='/orders'>
-      <p>Orders component placeholder, you can make return here</p>
+      <Col
+        xl={{ span: 8, offset: 2 }}
+        className='my-4'
+      >
+        <Orders />
+      </Col>
     </Route>
 
     <Route path='/returns'>
-      <p>Returns component placeholder</p>
+      <Col
+        xl={{ span: 8, offset: 2 }}
+        className='my-4'
+      >
+        <Returns />
+      </Col>
     </Route>
 
   </Switch>

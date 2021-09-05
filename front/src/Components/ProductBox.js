@@ -1,6 +1,15 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
+import { useContext } from "react";
+import { storeContext } from "../storeContext";
 
 const ProductBox = ({ product }) => {
+  const store = useContext(storeContext);
+
+  const addToCart = (product) => {
+    console.log(product);
+    store.dispatch({ type: 'add-to-cart', payload: product });
+  }
+
   return (
     <Container
       className="border-bottom border-light border-3 mb-2"
@@ -23,6 +32,7 @@ const ProductBox = ({ product }) => {
               <Col sm={{ span: 3, offset: 1 }}>
                 <Button
                   variant='outline-primary'
+                  onClick={() => addToCart(product)}
                 >
                   Add to cart
                 </Button>
