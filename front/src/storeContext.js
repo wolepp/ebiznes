@@ -6,6 +6,7 @@ const storage = localStorage;
 const defaultState = {
   count: 0,
   cart: new Map(),
+  wishlists: {},
 }
 
 // todo: Nie działa zapisywanie lub ładowanie koszyka
@@ -17,8 +18,8 @@ const loadData = (state) => {
     const data = JSON.parse(value);
 
     state.count = data.count;
-    state.cart = new Map(JSON.parse(data.cart));
-    console.log(state.cart);
+    state.wishlists = data.wishlists;
+    state.cart = new Map(data.cart);
 
   } catch (e) {
     // nothing stored or wrong data
@@ -29,7 +30,8 @@ const saveData = (state) => {
   try {
     storage.setItem(KEY, JSON.stringify({
       count: state.count,
-      cart: JSON.stringify([...state.cart]),
+      wishlists: state.wishlists,
+      cart: [...state.cart],
     }))
   } catch (e) {
     // no storage
@@ -38,6 +40,12 @@ const saveData = (state) => {
 
 const reducer = (state, action) => {
   switch (action.type) {
+
+    case 'CLEAR-STATE': {
+      const newState = defaultState;
+      saveData(newState);
+      return newState;
+    }
 
     case 'increment': {
       const newState = { ...state, count: state.count + 1 }
@@ -96,6 +104,76 @@ const reducer = (state, action) => {
 
     case 'clear-cart': {
       const newState = { ...state, cart: new Map() }
+      saveData(newState);
+      return newState;
+    }
+
+    case 'create-wishlist': {
+      const { wishlistName } = action.payload
+      const { wishlists } = state;
+
+      if (wishlists[wishlistName]) {
+        return state;
+      }
+
+      wishlists[wishlistName] = [];
+
+      const newState = { ...state, wishlists: wishlists }
+      saveData(newState);
+      return newState;
+    }
+
+    case 'remove-wishlist': {
+      const { wishlistName } = action.payload;
+      const { wishlists } = state;
+
+      if (!wishlists[wishlistName]) {
+        return state;
+      }
+
+      delete wishlists[wishlistName];
+
+      const newState = { ...state, wishlists: wishlists }
+      saveData(newState);
+      return newState;
+    }
+
+    case 'add-to-wishlist': {
+      const { product, wishlistName } = action.payload;
+      const { wishlists } = state;
+
+      const wishlist = wishlists[wishlistName];
+
+      if (wishlist) {
+        if (wishlist.find(p => p.id === product.id)) {
+          return state;
+        }
+        wishlist.push(product);
+      } else {
+        return state;
+      }
+
+      const newState = { ...state, wishlists: wishlists }
+      saveData(newState);
+      return newState;
+    }
+
+    case 'remove-from-wishlist': {
+      const { product, wishlistName } = action.payload;
+      const { wishlists } = state;
+
+      const wishlist = wishlists[wishlistName];
+
+      if (wishlist) {
+        const index = wishlist.indexOf(wishlist.find(p => p.id === product.id));
+        if (index !== -1) {
+          wishlist.splice(index, 1);
+        }
+      } else {
+        return state;
+      }
+
+      const newState = { ...state, wishlists: wishlists }
       saveData(newState);
       return newState;
     }

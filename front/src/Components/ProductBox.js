@@ -1,42 +1,85 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useContext } from "react";
 import { storeContext } from "../storeContext";
+import CartQuantityCounter from "./CartQuantityCounter";
+import WishlistAddDropdown from "./WishlistAddDropdown";
 
-const ProductBox = ({ product }) => {
+const ProductBox = (
+  {
+    product,
+    wishlistAddDropdown = true,
+    onRemove = false,
+    last = false,
+  }) => {
+
   const store = useContext(storeContext);
 
   const addToCart = (product) => {
-    console.log(product);
     store.dispatch({ type: 'add-to-cart', payload: product });
   }
 
+  const containerClass = last
+    ?
+    "mb-2"
+    :
+    "border-bottom border-light border-3 mb-2"
+
   return (
     <Container
-      className="border-bottom border-light border-3 mb-2"
+      className={containerClass}
       style={{ minHeight: '120px', maxHeight: '250px' }}
     >
-      <Row>
+      <Row className='align-items-center justify-content-center'>
+
         <Col>
 
           <Container className='p-0'>
-            <Row className='mt-3 p-0'>
+            <Row className='mt-3 p-0 justify-content-between'>
 
-              <Col sm={{ span: 4, offset: 0 }} className='px-4'>
-                <h3>{product.name}</h3>
+
+              <Col sm={{ span: 3, offset: 0 }} className='px-4'>
+                <h4>{product.name}</h4>
               </Col>
 
-              <Col sm={{ span: 2, offset: 2 }}>
-                <h4>{product.price} zł</h4>
+              <Col sm={{ span: 2, offset: 0 }}>
+                <h5>{product.price} zł</h5>
               </Col>
 
-              <Col sm={{ span: 3, offset: 1 }}>
+              {wishlistAddDropdown &&
+              <Col sm={{ span: 2, offset: 0 }}>
+                <WishlistAddDropdown product={product} />
+              </Col>
+              }
+
+              {store.state.cart.has(product.id)
+                ?
+                <Col sm={{ span: "auto", offset: '1' }}>
+                  <CartQuantityCounter product={product} />
+                </Col>
+                :
+                <Col sm={{ span: "auto", offset: '1' }}>
+                  <Button
+                    style={{ width: '120px' }}
+                    variant='primary'
+                    onClick={() => addToCart(product)}
+                  >
+                    Add to cart
+                  </Button>
+                </Col>
+              }
+
+              {onRemove &&
+              <Col sm={{ span: "auto" }} className='text-end'>
                 <Button
-                  variant='outline-primary'
-                  onClick={() => addToCart(product)}
+                  variant='outline-secondary'
+                  size='sm'
+                  onClick={onRemove}
                 >
-                  Add to cart
+                  X
                 </Button>
               </Col>
+              }
+
 
             </Row>
           </Container>

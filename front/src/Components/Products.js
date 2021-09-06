@@ -15,9 +15,13 @@ const Products = () => {
     <Container>
       <Row>
         <Col>
-          {products.map(p => (
-            <ProductBox key={p.id} product={p} />
-          ))}
+          {products.map((p, i, { length }) => {
+            if (i === length - 1) {
+              return <ProductBox key={p.id} product={p} last={true} />
+            } else {
+              return <ProductBox key={p.id} product={p} />
+            }
+          })}
         </Col>
       </Row>
     </Container>

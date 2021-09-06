@@ -7,6 +7,8 @@ import Account from "./Components/Account";
 import Orders from "./Components/Orders";
 import Returns from "./Components/Returns";
 import Cart from "./Components/Cart";
+import Product from "./Components/Product";
+import Wishlists from "./Components/Wishlists";
 
 const Routes = () => (
   <Switch>
@@ -47,8 +49,13 @@ const Routes = () => (
     </Route>
 
     <Route path='/wishlists'>
-      <p>Wishlists component placeholder</p>
-    </Route>
+      <Col
+        xl={{ span: 8, offset: 2 }}
+        className='my-4'
+        >
+      <Wishlists />
+    </Col>
+  </Route>
 
     <Route path='/account'>
       <Col
@@ -59,9 +66,7 @@ const Routes = () => (
       </Col>
     </Route>
 
-    <Route path='/product/:id'>
-      <p>Product Id component placeholder</p>
-    </Route>
+    <Route path='/product/:id' children={<Product />} />
 
     <Route path='/products'>
       <Col
