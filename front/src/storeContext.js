@@ -17,7 +17,8 @@ const loadData = (state) => {
     const data = JSON.parse(value);
 
     state.count = data.count;
-    state.cart = new Map(data.cart);
+    state.cart = new Map(JSON.parse(data.cart));
+    console.log(state.cart);
 
   } catch (e) {
     // nothing stored or wrong data
@@ -28,7 +29,7 @@ const saveData = (state) => {
   try {
     storage.setItem(KEY, JSON.stringify({
       count: state.count,
-      cart: state.cart,
+      cart: JSON.stringify([...state.cart]),
     }))
   } catch (e) {
     // no storage
