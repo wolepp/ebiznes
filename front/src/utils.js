@@ -1,6 +1,6 @@
 import ky from "ky";
 
-async function sendRequest(url, method, { params = undefined, data = undefined } = {}) {
+export default async function sendRequest(url, method, { params = undefined, data = undefined } = {}) {
 
   switch (method.toUpperCase()) {
     case "GET":
@@ -19,4 +19,8 @@ async function sendRequest(url, method, { params = undefined, data = undefined }
   }
 }
 
-export default sendRequest;
+const zip = (a, b) => a.map((k, i) => [k, b[i]]);
+
+export {
+  zip
+};

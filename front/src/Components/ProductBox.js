@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { storeContext } from "../storeContext";
 import CartQuantityCounter from "./CartQuantityCounter";
 import WishlistAddDropdown from "./WishlistAddDropdown";
+import { Link } from "react-router-dom";
 
 const ProductBox = (
   {
@@ -38,7 +39,7 @@ const ProductBox = (
 
 
               <Col sm={{ span: 3, offset: 0 }} className='px-4'>
-                <h4>{product.name}</h4>
+                <h4><Link to={'/product/' + product.id} >{product.name}</Link></h4>
               </Col>
 
               <Col sm={{ span: 2, offset: 0 }}>
@@ -54,7 +55,7 @@ const ProductBox = (
               {store.state.cart.has(product.id)
                 ?
                 <Col sm={{ span: "auto", offset: '1' }}>
-                  <CartQuantityCounter product={product} />
+                  <CartQuantityCounter product={product} width={120}/>
                 </Col>
                 :
                 <Col sm={{ span: "auto", offset: '1' }}>

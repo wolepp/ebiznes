@@ -31,6 +31,14 @@ const WishlistBox = ({ wishlistName }) => {
     })
   }
 
+  const addAllToCart = () => {
+    store.dispatch({
+      type: 'add-all-from-wishlist-to-cart', payload: {
+        wishlistName: wishlistName,
+      }
+    })
+  }
+
 
   return (
     <Container
@@ -41,7 +49,16 @@ const WishlistBox = ({ wishlistName }) => {
           <h3 className='fst-italic text-decoration-underline'>{wishlistName}</h3>
         </Col>
 
-        <Col sm className='text-end'>
+        <Col sm={{span: "auto"}} className='text-end'>
+          <Button
+            variant='outline-secondary'
+            onClick={addAllToCart}
+          >
+            Add all to cart
+          </Button>
+        </Col>
+
+        <Col sm={{span: "auto"}} className='text-end'>
           <Button
             variant='outline-secondary'
             onClick={removeWishlist}
@@ -49,6 +66,7 @@ const WishlistBox = ({ wishlistName }) => {
             Remove wishlist
           </Button>
         </Col>
+
       </Row>
 
       {products.length > 0 ? (

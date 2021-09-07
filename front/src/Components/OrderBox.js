@@ -1,4 +1,5 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
+import OrderItemsTable from "./OrderItemsTable";
 
 const OrderBox = ({ order }) => {
   const dataRow = 'mb-3 border-bottom border-light border-3';
@@ -58,6 +59,12 @@ const OrderBox = ({ order }) => {
           </Button>
         </Col>
 
+      </Row>
+
+      <Row className='mt-3'>
+        <Col>
+          <OrderItemsTable orderId={order.id} />
+        </Col>
       </Row>
     </Container>
   );

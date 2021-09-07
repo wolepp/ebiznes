@@ -178,6 +178,28 @@ const reducer = (state, action) => {
       return newState;
     }
 
+    case 'add-all-from-wishlist-to-cart': {
+      const { wishlistName } = action.payload;
+      const { cart, wishlists } = state;
+
+      const wishlist = wishlists[wishlistName];
+
+      if (wishlist) {
+        wishlist.forEach(p => {
+          if (!cart.has(p.id)) {
+            cart.set(p.id, {
+              count: 1,
+              product: p,
+            })
+          }
+        })
+      }
+
+      const newState = { ...state, cart: cart }
+      saveData(newState);
+      return newState;
+    }
+
     default:
       throw new Error('Unknown action type: ' + action.type);
   }
