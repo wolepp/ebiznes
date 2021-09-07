@@ -20,11 +20,12 @@ class OrderItemRepository @Inject() (
   class OrderItemTable(tag: Tag) extends BaseTable(tag) {
     def orderId   = column[Int]("order_id")
     def productId = column[Int]("product_id")
+    def quantity  = column[Int]("quantity")
 
     def order_fk   = foreignKey("order_fk", orderId, orderRepository.entities)(_.id)
     def product_fk = foreignKey("product_fk", productId, productRepository.entities)(_.id)
 
-    def * = (id.?, orderId, productId) <> ((OrderItem.apply _).tupled, OrderItem.unapply)
+    def * = (id.?, orderId, productId, quantity) <> ((OrderItem.apply _).tupled, OrderItem.unapply)
   }
 
   lazy val entities: TableQuery[OrderItemTable] = TableQuery[OrderItemTable]

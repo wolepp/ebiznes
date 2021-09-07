@@ -10,6 +10,7 @@
     <input name="id" id="id" value="@id" type="hidden" />
     @inputText(orderItem("orderId"), Symbol("readonly") -> "readonly")
     @inputText(orderItem("productId"), Symbol("readonly") -> "readonly")
+    @inputText(orderItem("quantity"), Symbol("readonly") -> "readonly")
 
     <div class="buttons">
         <input type="submit" value="RemoveOrderItem"/>

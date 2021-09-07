@@ -23,7 +23,8 @@ class OrderItemController @Inject() (
     mapping(
       "id"        -> optional(number),
       "orderId"   -> number,
-      "productId" -> number
+      "productId" -> number,
+      "quantity"  -> number
     )(OrderItem.apply)(OrderItem.unapply)
   }
 

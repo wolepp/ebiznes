@@ -30,6 +30,7 @@ CREATE TABLE "orderitem"
     "id"         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "order_id"   INTEGER NOT NULL,
     "product_id" INTEGER NOT NULL,
+    "quantity"   INTEGER NOT NULL,
     FOREIGN KEY (order_id) REFERENCES "order" (id),
     FOREIGN KEY (product_id) REFERENCES "product" (id)
 );

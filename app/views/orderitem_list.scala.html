@@ -15,6 +15,7 @@
             @orderItem.id
             @orderItem.orderId
             @orderItem.productId
+            @orderItem.quantity
             <a href="@controllers.routes.OrderItemController.formUpdate(orderItem.id.getOrElse(-1))">Edit</a>
             <a href="@controllers.routes.OrderItemController.formDelete(orderItem.id.get)">Delete</a>
             <br>
