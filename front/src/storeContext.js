@@ -9,7 +9,6 @@ const defaultState = {
   wishlists: {},
 }
 
-// todo: Nie działa zapisywanie lub ładowanie koszyka
 const loadData = (state) => {
   try {
     const value = storage.getItem(KEY);

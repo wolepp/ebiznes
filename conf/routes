@@ -191,3 +191,10 @@ GET           /wishlist/update/:id            controllers.WishlistController.for
 POST          /wishlist/update/               controllers.WishlistController.formUpdateHandler()
 GET           /wishlist/delete/:id            controllers.WishlistController.formDelete(id: Int)
 POST          /wishlist/delete/               controllers.WishlistController.formDeleteHandler()
+
+# ================== AUTHENTICATION
+
+POST          /signUp                         controllers.SignUpController.signUp
+POST          /signIn                         controllers.SignInController.signIn
+POST          /signOut                        controllers.SignInController.signOut
+GET           /authenticate/:provider         controllers.SocialAuthController.authenticate(provider: String)

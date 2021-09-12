@@ -1,0 +1,29 @@
+# JAVA SBT
+FROM adoptopenjdk/openjdk8:alpine as sbt
+
+RUN apk add --no-cache bash \
+  && addgroup -g 101 -S sbt \
+  && adduser -S -D -H -u 101 -h /home/sbt -s /sbin/nologin -G sbt -g sbt sbt \
+  && mkdir -p /home/sbt/app \
+  && chown -R sbt:sbt /home/sbt
+
+EXPOSE 9000
+ARG SBT_VERSION=1.5.4
+ENV PATH "$PATH:/usr/local/sbt/bin"
+
+# Install sbt
+RUN wget -q -O- https://github.com/sbt/sbt/releases/download/v$SBT_VERSION/sbt-$SBT_VERSION.tgz | tar xfvz - -C /usr/local
+USER sbt
+WORKDIR /home/sbt/app
+RUN sbt scalaVersion
+
+FROM sbt as all
+# install npm
+USER root
+RUN apk add --no-cache yarn
+
+# default for react (node)
+EXPOSE 3000
+
+USER sbt
+WORKDIR /home/sbt/app

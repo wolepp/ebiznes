@@ -1,19 +1,21 @@
 @import models.User
 @(user: Form[User])(implicit request: MessagesRequestHeader, flash: Flash)
 
-@import helper._
+    @import helper._
 
-@flash.get("success").getOrElse("")
+    @flash.get("success").getOrElse("")
 
-@form(controllers.routes.UserController.formCreateHandler) {
-    @helper.CSRF.formField
-    @inputText(user("name"))
-    @inputText(user("email"))
-    @inputText(user("password"))
-    @inputText(user("city"))
-    @inputText(user("address"))
+    @form(controllers.routes.UserController.formCreateHandler) {
+        @helper.CSRF.formField
+        @inputText(user("name"))
+        @inputText(user("email"))
+        @inputText(user("password"))
+        @inputText(user("providerId"))
+        @inputText(user("providerKey"))
+        @inputText(user("city"))
+        @inputText(user("address"))
 
-    <div class="buttons">
-        <input type="submit" value="Add User"/>
-    </div>
-}
+        <div class="buttons">
+            <input type="submit" value="Add User"/>
+        </div>
+    }

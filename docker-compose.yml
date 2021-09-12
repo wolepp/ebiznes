@@ -1,11 +1,19 @@
 version: "3.7"
 services:
-  sklep:
-    image: wlepich/ebiznes
-    stdin_open: true
-    #tty: true
-    volumes:
-      - ./:/home/newuser/sklep
+
+  backend:
+    image: test-backend
+    environment:
+      - PLAY_SECRET_KEY
+      - GOOGLE_ID
+      - GOOGLE_KEY
+      - FACEBOOK_ID
+      - FACEBOOK_KEY
     ports:
-      - 3000:3000   # react
-      - 9000:9000   # scala play
+      - "9000:9000"   # scala play
+
+  frontend:
+    image: test-frontend
+    ports:
+      - "80:80"   # nginx
+      - "8080:8080"

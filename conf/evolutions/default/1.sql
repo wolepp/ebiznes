@@ -1,5 +1,32 @@
 -- !Ups
 
+CREATE TABLE "authtokentable"
+(
+    "id"      INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "user_id" INTEGER NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES "user" (id)
+);
+
+CREATE TABLE "oAuth2Info"
+(
+    "id"          INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "providerId"  VARCHAR NOT NULL,
+    "providerKey" VARCHAR NOT NULL,
+    "accessToken" VARCHAR NOT NULL,
+    "tokenType"   VARCHAR,
+    "expiresIn"   INTEGER
+);
+
+CREATE TABLE "passwordInfo"
+(
+    "id"          INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "providerId"  VARCHAR NOT NULL,
+    "providerKey" VARCHAR NOT NULL,
+    "hasher"      VARCHAR NOT NULL,
+    "password"    VARCHAR NOT NULL,
+    "salt"        VARCHAR
+);
+
 CREATE TABLE "cartitem"
 (
     "id"         INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -73,12 +100,14 @@ CREATE TABLE "return"
 
 CREATE TABLE "user"
 (
-    "id"       INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-    "name"     VARCHAR NOT NULL,
-    "email"    VARCHAR NOT NULL,
-    "password" VARCHAR NOT NULL,
-    "city"     VARCHAR NOT NULL,
-    "address"  VARCHAR NOT NULL
+    "id"           INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "name"         VARCHAR NOT NULL,
+    "email"        VARCHAR NOT NULL,
+    "password"     VARCHAR NOT NULL,
+    "provider_id"  VARCHAR NOT NULL,
+    "provider_key" VARCHAR NOT NULL,
+    "city"         VARCHAR NOT NULL,
+    "address"      VARCHAR NOT NULL
 );
 
 CREATE TABLE "wishlistitem"
@@ -100,6 +129,9 @@ CREATE TABLE "wishlist"
 
 -- !Downs
 
+DROP TABLE "authtokentable";
+DROP TABLE "oAuth2Info";
+DROP TABLE "passwordInfo";
 DROP TABLE "cartitem";
 DROP TABLE "category";
 DROP TABLE "delivery";

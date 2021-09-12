@@ -22,12 +22,14 @@ class UserController @Inject() (
 
   val form: Form[User] = Form {
     mapping(
-      "id"       -> optional(number),
-      "name"     -> nonEmptyText,
-      "email"    -> email,
-      "password" -> nonEmptyText,
-      "city"     -> nonEmptyText,
-      "address"  -> nonEmptyText
+      "id"          -> optional(number),
+      "name"        -> nonEmptyText,
+      "email"       -> email,
+      "password"    -> nonEmptyText,
+      "providerId"  -> nonEmptyText,
+      "providerKey" -> nonEmptyText,
+      "city"        -> nonEmptyText,
+      "address"     -> nonEmptyText
     )(User.apply)(User.unapply)
   }
 

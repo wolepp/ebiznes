@@ -1,0 +1,17 @@
+FROM node:16 as frontend-skeleton
+
+USER node
+WORKDIR /home/node
+ENV NODE_ENV=production
+
+RUN ["mkdir", "-p", "./.yarn/"]
+COPY --chown=node front/package.json ./
+RUN ["npm", "install"]
+COPY front/ .
+EXPOSE 3000
+RUN ["npm", "run", "build"]
+
+FROM nginx:stable-alpine as frontend
+COPY --from=frontend-skeleton /home/node/build/ /usr/share/nginx/html
+COPY .nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 80

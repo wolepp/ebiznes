@@ -1,0 +1,27 @@
+#FROM wlepich/ebiznes as backend-skeleton
+# FROM docker.io/j000/ebiznes:sbt as backend-skeleton
+# FROM jarek-base as backend-skeleton
+FROM test-base as backend-skeleton
+
+RUN ["mkdir", "-p", "./project"]
+
+COPY build.sbt .
+COPY project/plugins.sbt project/build.properties ./project/
+COPY app ./app/
+COPY conf ./conf/
+
+EXPOSE 9000
+
+RUN ["sbt", "clean", "stage"]
+RUN ["mkdir", "/home/sbt/app/target/universal/stage/data/"]
+RUN ["chmod", "0777", "/home/sbt/app/target/universal/stage/data/"]
+
+FROM gcr.io/distroless/java:8 as backend-runner
+USER nonroot
+WORKDIR /home/nonroot
+# COPY --chown=nonroot --from=back-end-builder /home/app/project/target/scala-2.13/sklep-assembly-1.0-SNAPSHOT.jar ./sklep.jar
+COPY --from=backend-skeleton /home/sbt/app/target/universal/stage/ ./
+EXPOSE 9000
+
+ENTRYPOINT ["java"]
+CMD ["-Duser.dir=/home/nonroot", "-cp", "conf/:lib/*", "play.core.server.ProdServerStart"]

@@ -1,0 +1,7 @@
+**/.git
+**/.gitignore
+**/Dockerfile*
+**/.dockerignore
+
+front/.idea
+**/node_modules
