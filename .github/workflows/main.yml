@@ -58,7 +58,7 @@ jobs:
           context: ./
           file: ./Dockerfile.backend
           push: true
-          tags: ${{ steps.prep.outputs.tagged_image_base }}
+          tags: ${{ steps.prep.outputs.tagged_image_backend }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
@@ -69,7 +69,7 @@ jobs:
           context: ./
           file: ./Dockerfile.frontend
           push: true
-          tags: ${{ steps.prep.outputs.tagged_image_base }}
+          tags: ${{ steps.prep.outputs.tagged_image_frontend }}
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
 
