@@ -13,7 +13,7 @@ jobs:
       with:
         login-server: index.docker.io
         username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
+        password: ${{ secrets.REGISTRY_TOKEN }}
     - run: |
         docker build . -t wlepich/ebiznes-base:${{ github.sha }} -f Dockerfile.base
         docker push wlepich/ebiznes-base:${{ github.sha }}
