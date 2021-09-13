@@ -10,6 +10,18 @@ jobs:
       - name: Check Out Repo
         uses: actions/checkout@v2
 
+      - name: Prepare cache
+        id: prep
+        run |
+          TAG="latest"
+          IMAGE_BASE="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-base:${TAG}
+          IMAGE_BACKEND="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-backend:${TAG}
+          IMAGE_FRONTEND="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-frontend:${TAG}
+          echo ::set-output name=tagged_image_base::${IMAGE_BASE}:${TAG}
+          echo ::set-output name=tagged_image_backend::${IMAGE_BACKEND}:${TAG}
+          echo ::set-output name=tagged_image_frontend::${IMAGE_FRONTEND}:${TAG}
+          echo ::set-output name=tag::${TAG}
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v1
         with:
@@ -27,9 +39,9 @@ jobs:
           context: ./
           file: ./Dockerfile.base
           push: true
-          tags: ${{ secrets.REGISTRY_USERNAME }}/ebiznes-base:latest
-          cache-from: type=registry,ref=user/app:latest
-          cache-to: type=inline
+          tags: ${{ steps.prep.outputs.tagged_image_base }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
 
       - name: Build and push backend image
         id: docker_build_backend
@@ -38,9 +50,9 @@ jobs:
           context: ./
           file: ./Dockerfile.backend
           push: true
-          tags: ${{ secrets.REGISTRY_USERNAME }}/ebiznes-backend:latest
-          cache-from: type=registry,ref=user/app:latest
-          cache-to: type=inline
+          tags: ${{ steps.prep.outputs.tagged_image_base }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
 
       - name: Build and push frontend image
         id: docker_build_frontend
@@ -49,8 +61,12 @@ jobs:
           context: ./
           file: ./Dockerfile.frontend
           push: true
-          tags: ${{ secrets.REGISTRY_USERNAME }}/ebiznes-frontend:latest
-          cache-from: type=registry,ref=user/app:latest
-          cache-to: type=inline
+          tags: ${{ steps.prep.outputs.tagged_image_base }}
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
 
- # fake change - test docker cache
+      - name: Move cache
+        run: |
+          rm -rf /tmp/.buildx-cache
+          mv /tmp/.buildx-cache-new /tmp/.buildx-cache
+
