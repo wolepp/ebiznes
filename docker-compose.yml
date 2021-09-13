@@ -9,11 +9,18 @@ services:
       - GOOGLE_KEY
       - FACEBOOK_ID
       - FACEBOOK_KEY
-    ports:
-      - "9000:9000"   # scala play
+    expose:
+      - "9000"    # scala play
+    networks:
+      - my-network
 
   frontend:
     image: wlepich/ebiznes-frontend:latest
     ports:
       - "80:80"   # nginx
       - "8080:8080"
+    networks:
+      - my-network
+
+networks:
+  my-network:
