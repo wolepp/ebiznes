@@ -28,8 +28,8 @@ jobs:
           file: ./Dockerfile.base
           push: true
           tags: ${{ secrets.REGISTRY_USERNAME }}/ebiznes-base:latest
-          cache-from: type=registry,ref=user/app:buildcache
-          cache-to: type=registry,ref=user/app:buildcache,mode=max
+          cache-from: type=registry,ref=user/app:latest
+          cache-to: type=inline
 
       - name: Build and push backend image
         id: docker_build_backend
@@ -39,8 +39,8 @@ jobs:
           file: ./Dockerfile.backend
           push: true
           tags: ${{ secrets.REGISTRY_USERNAME }}/ebiznes-backend:latest
-          cache-from: type=registry,ref=user/app:buildcache
-          cache-to: type=registry,ref=user/app:buildcache,mode=max
+          cache-from: type=registry,ref=user/app:latest
+          cache-to: type=inline
 
       - name: Build and push frontend image
         id: docker_build_frontend
@@ -50,6 +50,6 @@ jobs:
           file: ./Dockerfile.frontend
           push: true
           tags: ${{ secrets.REGISTRY_USERNAME }}/ebiznes-frontend:latest
-          cache-from: type=registry,ref=user/app:buildcache
-          cache-to: type=registry,ref=user/app:buildcache,mode=max
+          cache-from: type=registry,ref=user/app:latest
+          cache-to: type=inline
 
