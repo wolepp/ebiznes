@@ -78,3 +78,11 @@ jobs:
           rm -rf /tmp/.buildx-cache
           mv /tmp/.buildx-cache-new /tmp/.buildx-cache
 
+      - name: Deploy to Azure
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'wlepich-ebiznes'
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: |
+            ${{ steps.prep.outputs.tagged_image_backend }}
+            ${{ steps.prep.outputs.tagged_image_frontend }}
