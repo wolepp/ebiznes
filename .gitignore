@@ -13,3 +13,5 @@ project/target
 
 *.log
 *.class
+
+.env

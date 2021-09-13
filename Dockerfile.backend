@@ -1,7 +1,4 @@
-#FROM wlepich/ebiznes as backend-skeleton
-# FROM docker.io/j000/ebiznes:sbt as backend-skeleton
-# FROM jarek-base as backend-skeleton
-FROM test-base as backend-skeleton
+FROM wlepich/ebiznes:base as backend-skeleton
 
 RUN ["mkdir", "-p", "./project"]
 

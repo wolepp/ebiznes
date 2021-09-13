@@ -2,7 +2,7 @@ version: "3.7"
 services:
 
   backend:
-    image: wlepich/ebiznes:backend
+    image: wlepich/ebiznes-backend:latest
     environment:
       - PLAY_SECRET_KEY
       - GOOGLE_ID
@@ -13,7 +13,7 @@ services:
       - "9000:9000"   # scala play
 
   frontend:
-    image: wlepich/ebiznes:frontend
+    image: wlepich/ebiznes-frontend:latest
     ports:
       - "80:80"   # nginx
       - "8080:8080"

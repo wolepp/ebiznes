@@ -15,7 +15,11 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
+        docker build . -t wlepich/ebiznes-base:${{ github.sha }} -f Dockerfile.base
+        docker push wlepich/ebiznes-base:${{ github.sha }}
+
         docker build . -t wlepich/ebiznes-backend:${{ github.sha }} -f Dockerfile.backend
-        docker push wlepich/ebiznes-backend:${{ github.sha }}  
+        docker push wlepich/ebiznes-backend:${{ github.sha }}
+
         docker build . -t wlepich/ebiznes-frontend:${{ github.sha }} -f Dockerfile.frontend
         docker push wlepich/ebiznes-frontend:${{ github.sha }}
