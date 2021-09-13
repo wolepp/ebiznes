@@ -1,4 +1,4 @@
-name: Build containers and rebuild azure
+name: Build containers and rebuild azure #
 
 on: [ push ]
 
