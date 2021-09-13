@@ -82,6 +82,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'wlepich-ebiznes'
+          slot-name: 'production'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          images: "DOCKER|wlepich/ebiznes-backend:latest
-            DOCKER|wlepich/ebiznes-frontend:latest"
+          images: 'index.docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-frontend:${{ steps.prep.outputs.tag }}'
