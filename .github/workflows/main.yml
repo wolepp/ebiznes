@@ -20,13 +20,14 @@ jobs:
         id: prep
         run |
           TAG="latest"
-          IMAGE_BASE="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-base:${TAG}
-          IMAGE_BACKEND="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-backend:${TAG}
-          IMAGE_FRONTEND="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-frontend:${TAG}
+          IMAGE_BASE="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-base"
+          IMAGE_BACKEND="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-backend"
+          IMAGE_FRONTEND="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-frontend"
           echo ::set-output name=tagged_image_base::${IMAGE_BASE}:${TAG}
           echo ::set-output name=tagged_image_backend::${IMAGE_BACKEND}:${TAG}
           echo ::set-output name=tagged_image_frontend::${IMAGE_FRONTEND}:${TAG}
           echo ::set-output name=tag::${TAG}
+
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
