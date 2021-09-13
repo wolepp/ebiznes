@@ -48,8 +48,8 @@ jobs:
           file: ./Dockerfile.base
           push: true
           tags: ${{ steps.prep.outputs.tagged_image_base }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          cache-from: type=local,src=/tmp/.buildx-cache/base
+          cache-to: type=local,dest=/tmp/.buildx-cache-new/base
 
       - name: Build and push backend image
         id: docker_build_backend
@@ -59,8 +59,8 @@ jobs:
           file: ./Dockerfile.backend
           push: true
           tags: ${{ steps.prep.outputs.tagged_image_backend }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          cache-from: type=local,src=/tmp/.buildx-cache/backend
+          cache-to: type=local,dest=/tmp/.buildx-cache-new/backend
 
       - name: Build and push frontend image
         id: docker_build_frontend
@@ -70,8 +70,8 @@ jobs:
           file: ./Dockerfile.frontend
           push: true
           tags: ${{ steps.prep.outputs.tagged_image_frontend }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          cache-from: type=local,src=/tmp/.buildx-cache/frontend
+          cache-to: type=local,dest=/tmp/.buildx-cache-new/frontend
 
       - name: Move cache
         run: |
