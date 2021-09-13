@@ -83,5 +83,5 @@ jobs:
         with:
           app-name: 'wlepich-ebiznes'
           publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          images: "${{ steps.prep.outputs.tagged_image_backend }}
-            ${{ steps.prep.outputs.tagged_image_frontend }}"
+          images: "DOCKER|wlepich/ebiznes-backend:latest
+            DOCKER|wlepich/ebiznes-frontend:latest"
