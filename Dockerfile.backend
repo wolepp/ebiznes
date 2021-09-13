@@ -1,4 +1,4 @@
-FROM wlepich/ebiznes:base as backend-skeleton
+FROM wlepich/ebiznes-base:latest as backend-skeleton
 
 RUN ["mkdir", "-p", "./project"]
 
