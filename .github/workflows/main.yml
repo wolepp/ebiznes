@@ -20,12 +20,8 @@ jobs:
         id: prep
         run |
           TAG="latest"
-          IMAGE_BASE="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-base"
-          IMAGE_BACKEND="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-backend"
-          IMAGE_FRONTEND="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-frontend"
+          IMAGE_BASE="docker.io/wlepich/ebiznes-base"
           echo ::set-output name=tagged_image_base::${IMAGE_BASE}:${TAG}
-          echo ::set-output name=tagged_image_backend::${IMAGE_BACKEND}:${TAG}
-          echo ::set-output name=tagged_image_frontend::${IMAGE_FRONTEND}:${TAG}
           echo ::set-output name=tag::${TAG}
 
       - name: Set up Docker Buildx
@@ -50,9 +46,10 @@ jobs:
           context: ./
           file: ./Dockerfile.backend
           push: true
-          tags: ${{ steps.prep.outputs.tagged_image_base }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          tags: ${{ secrets.REGISTRY_USERNAME }}/ebiznes-backend:latest
+#          tags: ${{ steps.prep.outputs.tagged_image_base }}
+#          cache-from: type=local,src=/tmp/.buildx-cache
+#          cache-to: type=local,dest=/tmp/.buildx-cache-new
 
       - name: Build and push frontend image
         id: docker_build_frontend
@@ -61,9 +58,10 @@ jobs:
           context: ./
           file: ./Dockerfile.frontend
           push: true
-          tags: ${{ steps.prep.outputs.tagged_image_base }}
-          cache-from: type=local,src=/tmp/.buildx-cache
-          cache-to: type=local,dest=/tmp/.buildx-cache-new
+          tags: ${{ secrets.REGISTRY_USERNAME }}/ebiznes-frontend:latest
+#          tags: ${{ steps.prep.outputs.tagged_image_base }}
+#          cache-from: type=local,src=/tmp/.buildx-cache
+#          cache-to: type=local,dest=/tmp/.buildx-cache-new
 
       - name: Move cache
         run: |
