@@ -19,7 +19,8 @@ jobs:
       - name: Prepare cache
         id: prep
         run: |
-          TAG=$(echo $GITHUB_SHA | head -c7)
+          #TAG=$(echo $GITHUB_SHA | head -c7)
+          TAG="latest"
           IMAGE_BASE="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-base"
           IMAGE_BACKEND="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-backend"
           IMAGE_FRONTEND="docker.io/${{ secrets.REGISTRY_USERNAME }}/ebiznes-frontend"
