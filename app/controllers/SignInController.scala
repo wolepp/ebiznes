@@ -68,14 +68,15 @@ class SignInController @Inject() (
 
   def check: Action[AnyContent] =
     silhouette.UserAwareAction { implicit request =>
-      val email =
+      val (email, name) = {
         request.identity match {
           case Some(identity) =>
-            identity.email
+            (identity.email, identity.name)
           case None =>
-            "Guest"
+            ("Guest", "Unknown")
         }
-      Ok(Json.obj("email" -> email))
+      }
+      Ok(Json.obj("email" -> email, "name" -> name))
     }
 
 }

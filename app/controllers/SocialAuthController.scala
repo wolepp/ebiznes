@@ -10,6 +10,7 @@ import play.filters.csrf.CSRF.Token
 import play.filters.csrf.{ CSRF, CSRFAddToken }
 import slick.jdbc.JdbcProfile
 
+import java.net.URLEncoder
 import javax.inject.Inject
 import scala.concurrent.{ ExecutionContext, Future }
 
@@ -63,13 +64,14 @@ class SocialAuthController @Inject() (
                       value <- authenticatorService.init(authenticator)
                       result <- authenticatorService.embed(
                                   value,
-                                  Redirect("https://example.com")
+                                  Redirect("http://localhost:3000/")
                                 )
                     } yield {
                       val Token(name, value) = CSRF.getToken.get
                       result.withCookies(
                         Cookie(name, value, httpOnly = false),
-                        Cookie("profile", user.email, httpOnly = false)
+                        Cookie("profile", user.email, httpOnly = false),
+                        Cookie("username", URLEncoder.encode(user.name, "UTF-8"), httpOnly = false)
                       )
                     }
                 }

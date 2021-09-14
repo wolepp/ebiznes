@@ -4,14 +4,7 @@ import { getCurrentUser } from "../Services/UserAPI";
 import { Link } from "react-router-dom";
 
 const Account = () => {
-  const [user, setUser] = useState({
-    "id": 1,
-    "name": "Steven Johns",
-    "email": "Brown_Veum43@example.net",
-    "password": "X8QNaXXYtUtkhXg",
-    "city": "New Keanu",
-    "address": "72880 Zemlak Radial"
-  });
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     getCurrentUser()

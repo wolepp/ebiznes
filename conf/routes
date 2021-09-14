@@ -194,7 +194,8 @@ POST          /wishlist/delete/               controllers.WishlistController.for
 
 # ================== AUTHENTICATION
 
-POST          /signUp                         controllers.SignUpController.signUp
-POST          /signIn                         controllers.SignInController.signIn
-POST          /signOut                        controllers.SignInController.signOut
+POST          /api/signUp                     controllers.SignUpController.signUp
+POST          /api/signIn                     controllers.SignInController.signIn
+GET           /api/check                      controllers.SignInController.check
+GET           /api/signOut                    controllers.SignInController.signOut
 GET           /authenticate/:provider         controllers.SocialAuthController.authenticate(provider: String)

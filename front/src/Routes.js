@@ -11,6 +11,7 @@ import Product from "./Components/Product";
 import Wishlists from "./Components/Wishlists";
 import Order from "./Components/Order";
 import Categories from "./Components/Categories";
+import Logout from "./Components/Logout";
 
 const Routes = () => (
   <>
@@ -46,7 +47,7 @@ const Routes = () => (
       </Route>
 
       <Route path='/auth/logout'>
-        <p>Logout redirect placeholder</p>
+        <Logout />
       </Route>
 
       <Route path='/auth/signup'>
