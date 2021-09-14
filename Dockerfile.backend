@@ -12,11 +12,13 @@ EXPOSE 9000
 RUN ["sbt", "clean", "stage"]
 RUN ["mkdir", "/home/sbt/app/target/universal/stage/data/"]
 RUN ["chmod", "0777", "/home/sbt/app/target/universal/stage/data/"]
+RUN ["mkdir", "-p", "./db"]
 
 FROM gcr.io/distroless/java:8 as backend-runner
 USER nonroot
 WORKDIR /home/nonroot
 COPY --from=backend-skeleton /home/sbt/app/target/universal/stage/ ./
+COPY --chown=nonroot --from=backend-skeleton /home/sbt/app/db /home/nonroot/db
 EXPOSE 9000
 
 ENTRYPOINT ["java"]
