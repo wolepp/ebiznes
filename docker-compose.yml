@@ -13,6 +13,8 @@ services:
       - "9000"    # scala play
     networks:
       - my-network
+    volumes:
+      - database:/home/nonroot/db
 
   frontend:
     image: wlepich/ebiznes-frontend:latest
@@ -24,3 +26,6 @@ services:
 
 networks:
   my-network:
+
+volumes:
+  database:

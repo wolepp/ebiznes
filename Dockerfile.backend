@@ -16,7 +16,6 @@ RUN ["chmod", "0777", "/home/sbt/app/target/universal/stage/data/"]
 FROM gcr.io/distroless/java:8 as backend-runner
 USER nonroot
 WORKDIR /home/nonroot
-# COPY --chown=nonroot --from=back-end-builder /home/app/project/target/scala-2.13/sklep-assembly-1.0-SNAPSHOT.jar ./sklep.jar
 COPY --from=backend-skeleton /home/sbt/app/target/universal/stage/ ./
 EXPOSE 9000
 
