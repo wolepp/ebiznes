@@ -18,6 +18,8 @@ case class User(
   override def insertId(id: Int): User = this.copy(id = Some(id))
 
   override def copyWithoutId: User = this.copy(id = None)
+
+  def withoutPassword: User = this.copy(password = "")
 }
 
 object User {

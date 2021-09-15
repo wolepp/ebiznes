@@ -2,10 +2,10 @@ import { Button, FloatingLabel, Form, FormGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import sendRequest from "../utilsMockup";
 import { useContext, useEffect } from "react";
 import { userContext } from "../userContext";
 import { useHistory } from "react-router-dom";
+import { signUp } from "../Services/UserAPI";
 
 const schema = yup.object().shape({
   email: yup.string()
@@ -44,8 +44,11 @@ const SignUp = () => {
 
   const onSubmit = data => {
     const { agreement, ...dataOmitAgreement } = data;
-    // todo: move to service
-    sendRequest('http://localhost:9000/auth/signup', 'POST', dataOmitAgreement);
+    signUp(dataOmitAgreement)
+      .then(responseData => {
+        user.dispatch({ type: 'set-user', payload: responseData })
+        history.push('/')
+      });
   }
 
   return (

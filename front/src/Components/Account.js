@@ -1,14 +1,14 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
-import { useEffect, useState } from "react";
-import { getCurrentUser } from "../Services/UserAPI";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { userContext } from "../userContext";
 
 const Account = () => {
   const [user, setUser] = useState({});
+  const userC = useContext(userContext);
 
   useEffect(() => {
-    getCurrentUser()
-      .then(data => setUser(data));
+    setUser(userC.state);
   }, []);
 
   const dataRow = 'mb-3 border-bottom border-light border-3';

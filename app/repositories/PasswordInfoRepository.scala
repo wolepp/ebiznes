@@ -31,9 +31,9 @@ class PasswordInfoRepository @Inject() (dbConfigProvider: DatabaseConfigProvider
   class PasswordInfoTable(tag: Tag) extends Table[PasswordInfoDto](tag, "passwordInfo") {
     def id = column[Long]("id", O.PrimaryKey, O.AutoInc)
 
-    def providerId = column[String]("provider_id")
+    def providerId = column[String]("providerId")
 
-    def providerKey = column[String]("provider_key")
+    def providerKey = column[String]("providerKey")
 
     def hasher = column[String]("hasher")
 

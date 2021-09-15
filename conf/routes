@@ -194,7 +194,9 @@ POST          /wishlist/delete/                  controllers.WishlistController.
 
 # ================== AUTHENTICATION
 
++nocsrf
 POST          /api/signUp                        controllers.SignUpController.signUp
++nocsrf
 POST          /api/signIn                        controllers.SignInController.signIn
 GET           /api/check                         controllers.SignInController.check
 GET           /api/signOut                       controllers.SignInController.signOut

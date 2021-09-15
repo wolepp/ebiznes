@@ -13,10 +13,13 @@ const reducer = (state, action) => {
   switch (action.type) {
 
     case 'set-user': {
-      const { name, email } = action.payload;
+      console.log('setting user' + JSON.stringify(action.payload))
+      const { name, email, city, address } = action.payload;
       return {
         email: email,
         name: name,
+        city: city || "",
+        address: address || "",
       }
     }
 
@@ -39,12 +42,12 @@ const UserProvider = ({ children }) => {
 
   useEffect(() => {
     const email = Cookie.get('profile');
-    const name = Cookie.get('name')
+    const name = Cookie.get('username')
     if (!email || !name) {
       return;
     }
     Cookie.remove('profile')
-    Cookie.remove('name')
+    Cookie.remove('username', { path: '/', domain: 'localhost' })
 
     dispatch({
       type: 'set-user', payload: {
@@ -55,7 +58,7 @@ const UserProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    sendRequest(CHECK_ENDPOINT, 'get')
+    sendRequest(CHECK_ENDPOINT)
       .then(data => {
         console.log(data)
         if (data.email !== 'Guest') {

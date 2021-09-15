@@ -12,7 +12,7 @@ const Login = () => {
   useEffect(async () => {
     if (user.state.email) {
       user.dispatch({type: 'clear-user'});
-      await sendRequest(SIGNOUT_ENDPOINT, 'get')
+      await sendRequest(SIGNOUT_ENDPOINT)
     }
     history.push('/')
   }, []);

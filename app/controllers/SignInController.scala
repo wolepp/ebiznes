@@ -10,6 +10,7 @@ import play.api.mvc._
 import play.filters.csrf.CSRF.Token
 import play.filters.csrf.{ CSRF, CSRFAddToken }
 
+import java.net.URLEncoder
 import javax.inject.{ Inject, Singleton }
 import scala.concurrent.{ ExecutionContext, Future }
 
@@ -37,7 +38,11 @@ class SignInController @Inject() (
               .flatMap {
                 case Some(user) =>
                   authenticateUser(user)
-                    .map(_.withCookies(Cookie(name, value, httpOnly = false)))
+                    .map(
+                      _.withCookies(Cookie(name, value, httpOnly = false))
+                        .withCookies(Cookie("profile", user.email, httpOnly = false))
+                        .withCookies(Cookie("username", URLEncoder.encode(user.name, "UTF-8"), httpOnly = false))
+                    )
                 case None =>
                   Future
                     .failed(new IdentityNotFoundException("Couldn't find user"))

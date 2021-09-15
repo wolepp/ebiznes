@@ -2,11 +2,11 @@ import { Button, FloatingLabel, Form, FormGroup } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import sendRequest from "../utilsMockup";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { userContext } from "../userContext";
 import { useHistory } from "react-router-dom";
 import { Facebook, Google } from "react-bootstrap-icons";
+import { logIn } from "../Services/UserAPI";
 
 const schema = yup.object().shape({
   email: yup.string()
@@ -19,6 +19,8 @@ const schema = yup.object().shape({
 
 const Login = () => {
   const user = useContext(userContext);
+  const [error, setError] = useState("");
+  const [timeoutId, setTimeoutId] = useState(0);
 
   const { register, handleSubmit, formState: { errors } } = useForm({
     resolver: yupResolver(schema)
@@ -26,17 +28,28 @@ const Login = () => {
   const history = useHistory();
 
   useEffect(() => {
-      if (user.state.email) {
-        setTimeout(() => {
-          history.push('/');
-        }, 3000);
-      }
+    if (user.state.email) {
+      const id = setTimeout(() => {
+        history.push('/');
+      }, 3000);
+      setTimeoutId(id);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    }
   }, [user, user.state, user.state.email]);
 
 
   const onSubmit = data => {
-    // todo: move to service
-    sendRequest('http://localhost:9000/auth/login', 'POST', data);
+    logIn(data)
+      .then(responseData => {
+        if (responseData.error) {
+          setError(responseData.error);
+        } else {
+          user.dispatch({ type: 'set-user', payload: responseData })
+        }
+      });
   }
 
   const loginGoogle = () => {
@@ -89,6 +102,12 @@ const Login = () => {
                   <Form.Control.Feedback type="invalid">{errors.password?.message}</Form.Control.Feedback>
                 </FloatingLabel>
               </FormGroup>
+
+              {error ?
+                <h5 className='text-center my-3 p-3 border border-3 text-danger border-danger'>{error}</h5>
+                :
+                <></>
+              }
 
               <Button variant="outline-primary" type="submit" className='w-100'>
                 Log in

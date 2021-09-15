@@ -4,9 +4,11 @@ import { storeContext } from "../storeContext";
 import CartItemBox from "./CartItemBox";
 import { createOrder } from "../Services/OrderAPI";
 import { useHistory } from "react-router-dom";
+import { userContext } from "../userContext";
 
 const Cart = () => {
   const store = useContext(storeContext);
+  const user = useContext(userContext);
   const history = useHistory();
 
   const { cart } = store.state;
@@ -26,6 +28,10 @@ const Cart = () => {
   }, [cart, cart.entries()]);
 
   const buyHandler = async () => {
+    if (!user.state.email) {
+      history.push('/auth/login');
+      return;
+    }
     if (cart.values().length === 0) {
       alert("Your cart is empty");
       return;
