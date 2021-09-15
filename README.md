@@ -12,7 +12,10 @@ https://wlepich-ebiznes.azurewebsites.net/
 Stara wersja:
 https://hub.docker.com/repository/docker/wlepich/ebiznes
 
+Nowa wersja - oddzielone kontenery:
+
 https://hub.docker.com/repository/docker/wlepich/ebiznes-backend
+
 https://hub.docker.com/repository/docker/wlepich/ebiznes-frontend
 
 ---
