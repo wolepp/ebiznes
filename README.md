@@ -9,12 +9,13 @@
 https://wlepich-ebiznes.azurewebsites.net/
 
 ## Dockerhub: 
-Old version:
+Stara wersja:
 https://hub.docker.com/repository/docker/wlepich/ebiznes
 
 New version:
 
 https://hub.docker.com/repository/docker/wlepich/ebiznes-backend
+
 https://hub.docker.com/repository/docker/wlepich/ebiznes-frontend
 
 ## Gallery 
