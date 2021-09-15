@@ -5,3 +5,5 @@
 
 front/.idea
 **/node_modules
+
+docs/**
