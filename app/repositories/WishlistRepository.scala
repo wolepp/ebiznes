@@ -21,7 +21,7 @@ class WishlistRepository @Inject() (
     def userId = column[Int]("user_id")
     def name   = column[Option[String]]("name")
 
-    def user_fk = foreignKey("user_fk", userId, userRepository.entities)(_.id)
+    def userFk = foreignKey("user_fk", userId, userRepository.entities)(_.id)
 
     def * = (id.?, userId, name) <> ((Wishlist.apply _).tupled, Wishlist.unapply)
   }

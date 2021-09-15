@@ -23,9 +23,9 @@ class OrderRepository @Inject() (
     def deliveryId = column[Option[Int]]("delivery_id")
     def paymentId  = column[Option[Int]]("payment_id")
 
-    def user_fk     = foreignKey("user_fk", userId, userRepository.entities)(_.id)
-    def delivery_fk = foreignKey("delivery_fk", deliveryId, deliveryRepository.entities)(_.id)
-    def payment_fk  = foreignKey("payment_fk", paymentId, paymentRepository.entities)(_.id)
+    def userFk     = foreignKey("user_fk", userId, userRepository.entities)(_.id)
+    def deliveryFk = foreignKey("delivery_fk", deliveryId, deliveryRepository.entities)(_.id)
+    def paymentFk  = foreignKey("payment_fk", paymentId, paymentRepository.entities)(_.id)
 
     def * = (id.?, userId, deliveryId, paymentId) <> ((Order.apply _).tupled, Order.unapply)
   }

@@ -21,8 +21,8 @@ class WishlistItemRepository @Inject() (
     def wishlistId = column[Int]("wishlist_id")
     def productId  = column[Int]("product_id")
 
-    def wishlist_fk = foreignKey("wishlist_fk", wishlistId, wishlistRepository.entities)(_.id)
-    def product_fk  = foreignKey("product_fk", productId, productRepository.entities)(_.id)
+    def wishlistFk = foreignKey("wishlist_fk", wishlistId, wishlistRepository.entities)(_.id)
+    def productFk  = foreignKey("product_fk", productId, productRepository.entities)(_.id)
 
     def * = (id.?, wishlistId, productId) <> ((WishlistItem.apply _).tupled, WishlistItem.unapply)
   }

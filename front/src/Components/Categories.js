@@ -2,8 +2,6 @@ import { Col, Container, Row } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import { getCategories } from "../Services/CategoriesAPI";
 import { Link } from "react-router-dom";
-import { getProductsOfCategory } from "../Services/ProductAPI";
-import { logDOM } from "@testing-library/react";
 
 const Categories = () => {
   const [categories, setCategories] = useState([]);
@@ -12,10 +10,6 @@ const Categories = () => {
     getCategories()
       .then(data => setCategories(data));
   }, []);
-
-  const resetCategories = () => {
-    console.log("showing all products")
-  }
 
   return (
     <Container className='border'>

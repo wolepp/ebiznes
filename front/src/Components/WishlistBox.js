@@ -1,6 +1,6 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
-import { storeContext } from "../storeContext";
+import { storeContext } from "../Store/storeContext";
 import ProductBox from "./ProductBox";
 
 const WishlistBox = ({ wishlistName }) => {

@@ -21,7 +21,7 @@ class ReturnRepository @Inject() (
     def orderId = column[Int]("order_id")
     def status  = column[Int]("status")
 
-    def order_fk = foreignKey("order_fk", orderId, orderRepository.entities)(_.id)
+    def orderFk = foreignKey("order_fk", orderId, orderRepository.entities)(_.id)
 
     def * = (id.?, orderId, status) <> ((Return.apply _).tupled, Return.unapply)
   }

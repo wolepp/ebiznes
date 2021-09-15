@@ -1,6 +1,6 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useContext } from "react";
-import { storeContext } from "../storeContext";
+import { storeContext } from "../Store/storeContext";
 import CartQuantityCounter from "./CartQuantityCounter";
 import WishlistAddDropdown from "./WishlistAddDropdown";
 import { Link } from "react-router-dom";
@@ -15,8 +15,8 @@ const ProductBox = (
 
   const store = useContext(storeContext);
 
-  const addToCart = (product) => {
-    store.dispatch({ type: 'add-to-cart', payload: product });
+  const addToCart = (p) => {
+    store.dispatch({ type: 'add-to-cart', payload: p });
   }
 
   const containerClass = last

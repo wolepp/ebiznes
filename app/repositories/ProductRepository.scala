@@ -22,7 +22,7 @@ class ProductRepository @Inject() (
     def description = column[String]("description")
     def price       = column[Int]("price")
 
-    def category_fk = foreignKey("category_fk", categoryId, categoryRepository.entities)(_.id)
+    def categoryFk = foreignKey("category_fk", categoryId, categoryRepository.entities)(_.id)
 
     def * = (id.?, categoryId, name, description, price) <> ((Product.apply _).tupled, Product.unapply)
   }

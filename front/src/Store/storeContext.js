@@ -1,4 +1,6 @@
 import { createContext, useReducer } from "react";
+import CartReducer from "./CartReducer";
+import WishlistReducer from "./WishlistReducer";
 
 const KEY = 'EBIZNES_STATE';
 const storage = localStorage;
@@ -56,14 +58,7 @@ const reducer = (state, action) => {
       const product = action.payload;
       const newState = { ...state }
 
-      if (newState.cart.has(product.id)) {
-        newState.cart.get(product.id).count += 1;
-      } else {
-        newState.cart.set(product.id, {
-          count: 1,
-          product: product,
-        })
-      }
+      CartReducer.addToCart(newState, product);
 
       saveData(newState);
       return newState;
@@ -73,13 +68,7 @@ const reducer = (state, action) => {
       const product = action.payload;
       const newState = { ...state }
 
-      if (newState.cart.has(product.id)) {
-        if (newState.cart.get(product.id).count === 1) {
-          newState.cart.delete(product.id);
-        } else {
-          newState.cart.get(product.id).count -= 1;
-        }
-      }
+      CartReducer.removeFromCart(newState, product);
 
       saveData(newState);
       return newState;
@@ -89,13 +78,7 @@ const reducer = (state, action) => {
       const { productId, newCount } = action.payload;
       const newState = { ...state }
 
-      if (newState.cart.has(productId)) {
-        if (newCount) {
-          newState.cart.get(productId).count = newCount;
-        } else {
-          newState.cart.delete(productId);
-        }
-      }
+      CartReducer.setQuantity(newState, productId, newCount);
 
       saveData(newState);
       return newState;
@@ -111,14 +94,10 @@ const reducer = (state, action) => {
       const { wishlistName } = action.payload
       const { wishlists } = state;
 
-      if (wishlists[wishlistName]) {
-        return state;
-      }
-
-      wishlists[wishlistName] = [];
+      WishlistReducer.createWishlist(wishlists, wishlistName);
 
       const newState = { ...state, wishlists: wishlists }
-      saveData(newState);
+      saveData(newState)
       return newState;
     }
 
@@ -126,11 +105,7 @@ const reducer = (state, action) => {
       const { wishlistName } = action.payload;
       const { wishlists } = state;
 
-      if (!wishlists[wishlistName]) {
-        return state;
-      }
-
-      delete wishlists[wishlistName];
+      WishlistReducer.removeWishlist(wishlists, wishlistName)
 
       const newState = { ...state, wishlists: wishlists }
       saveData(newState);
@@ -141,16 +116,7 @@ const reducer = (state, action) => {
       const { product, wishlistName } = action.payload;
       const { wishlists } = state;
 
-      const wishlist = wishlists[wishlistName];
-
-      if (wishlist) {
-        if (wishlist.find(p => p.id === product.id)) {
-          return state;
-        }
-        wishlist.push(product);
-      } else {
-        return state;
-      }
+      WishlistReducer.addToWishlist(wishlists, wishlistName, product);
 
       const newState = { ...state, wishlists: wishlists }
       saveData(newState);
@@ -161,16 +127,7 @@ const reducer = (state, action) => {
       const { product, wishlistName } = action.payload;
       const { wishlists } = state;
 
-      const wishlist = wishlists[wishlistName];
-
-      if (wishlist) {
-        const index = wishlist.indexOf(wishlist.find(p => p.id === product.id));
-        if (index !== -1) {
-          wishlist.splice(index, 1);
-        }
-      } else {
-        return state;
-      }
+      WishlistReducer.removeFromWishlist(wishlists, wishlistName, product);
 
       const newState = { ...state, wishlists: wishlists }
       saveData(newState);
@@ -179,22 +136,10 @@ const reducer = (state, action) => {
 
     case 'add-all-from-wishlist-to-cart': {
       const { wishlistName } = action.payload;
-      const { cart, wishlists } = state;
+      const newState = { ...state };
 
-      const wishlist = wishlists[wishlistName];
+      WishlistReducer.addAllToCart(newState, wishlistName)
 
-      if (wishlist) {
-        wishlist.forEach(p => {
-          if (!cart.has(p.id)) {
-            cart.set(p.id, {
-              count: 1,
-              product: p,
-            })
-          }
-        })
-      }
-
-      const newState = { ...state, cart: cart }
       saveData(newState);
       return newState;
     }

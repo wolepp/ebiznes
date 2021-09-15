@@ -1,6 +1,6 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
-import { storeContext } from "../storeContext";
+import { storeContext } from "../Store/storeContext";
 import CartItemBox from "./CartItemBox";
 import { createOrder } from "../Services/OrderAPI";
 import { useHistory } from "react-router-dom";

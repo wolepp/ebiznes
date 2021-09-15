@@ -19,7 +19,7 @@ class AuthTokenRepository @Inject() (
   class AuthTokenTable(tag: Tag) extends BaseTable(tag) {
     def userId = column[Int]("user_id")
 
-    def user_fk = foreignKey("user_fk", userId, userRepository.entities)(_.id)
+    def userFk = foreignKey("user_fk", userId, userRepository.entities)(_.id)
 
     def * = (id.?, userId) <> ((AuthToken.apply _).tupled, AuthToken.unapply)
   }

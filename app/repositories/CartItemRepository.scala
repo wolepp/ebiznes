@@ -22,8 +22,8 @@ class CartItemRepository @Inject() (
     def productId = column[Int]("product_id")
     def quantity  = column[Int]("quantity")
 
-    def user_fk    = foreignKey("user_fk", userId, userRepository.entities)(_.id)
-    def product_fk = foreignKey("product_fk", productId, productRepository.entities)(_.id)
+    def userFk    = foreignKey("user_fk", userId, userRepository.entities)(_.id)
+    def productFk = foreignKey("product_fk", productId, productRepository.entities)(_.id)
 
     def * = (id.?, userId, productId, quantity) <> ((CartItem.apply _).tupled, CartItem.unapply)
   }

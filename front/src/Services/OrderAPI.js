@@ -5,7 +5,7 @@ const ORDER_ENDPOINT = process.env.REACT_APP_API_URL + '/order';
 const ORDER_ITEM_ENDPOINT = process.env.REACT_APP_API_URL + '/orderitem';
 
 const getOrder = async (id) => {
-  return await sendRequest(ORDER_ENDPOINT + `/${id}`);
+  return sendRequest(ORDER_ENDPOINT + `/${id}`);
 }
 
 const createOrder = async (cart) => {
@@ -41,11 +41,9 @@ const getOrderItems = async (orderId) => {
     products.push(product);
   }
 
-  return new Promise((resolve, _) => {
-    resolve({
+  return Promise.resolve({
       orderItems: orderItems,
       products: products,
-    })
   })
 
 }

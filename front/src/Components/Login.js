@@ -49,6 +49,9 @@ const Login = () => {
         } else {
           user.dispatch({ type: 'set-user', payload: responseData })
         }
+      })
+      .catch(() => {
+        setError("Server unavailable")
       });
   }
 
@@ -103,10 +106,8 @@ const Login = () => {
                 </FloatingLabel>
               </FormGroup>
 
-              {error ?
+              {error.length > 0 &&
                 <h5 className='text-center my-3 p-3 border border-3 text-danger border-danger'>{error}</h5>
-                :
-                <></>
               }
 
               <Button variant="outline-primary" type="submit" className='w-100'>

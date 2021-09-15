@@ -1,6 +1,6 @@
 import { Button, Col, Container, FormControl, InputGroup, Row } from "react-bootstrap";
-import { useContext, useEffect, useState } from "react";
-import { storeContext } from "../storeContext";
+import { useContext } from "react";
+import { storeContext } from "../Store/storeContext";
 
 const CartQuantityCounter = ({ product, width }) => {
   const store = useContext(storeContext);
@@ -32,7 +32,7 @@ const CartQuantityCounter = ({ product, width }) => {
           <InputGroup
             className='p-0 m-0'
             style={{ width: width + 'px' }}
-            >
+          >
             <Button className='w-25' variant='outline-primary' onClick={decrementProduct}>-</Button>
             <FormControl
               type='text'
@@ -40,7 +40,7 @@ const CartQuantityCounter = ({ product, width }) => {
               value={store.state.cart.get(product.id).count}
               onChange={(e) => updateCount(e.target.value)}
             />
-            <Button className='w-25' variant='outline-primary'  onClick={incrementProduct}>+</Button>
+            <Button className='w-25' variant='outline-primary' onClick={incrementProduct}>+</Button>
           </InputGroup>
         </Col>
       </Row>

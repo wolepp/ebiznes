@@ -1,7 +1,7 @@
 import { Button, Col, Container, Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
-import { storeContext } from "../storeContext";
+import { storeContext } from "../Store/storeContext";
 import { getProduct } from "../Services/ProductAPI";
 import CartQuantityCounter from "./CartQuantityCounter";
 import WishlistAddDropdown from "./WishlistAddDropdown";
@@ -16,8 +16,8 @@ const Product = () => {
       .then(data => setProduct(data))
   }, []);
 
-  const addToCart = (product) => {
-    store.dispatch({ type: 'add-to-cart', payload: product });
+  const addToCart = (p) => {
+    store.dispatch({ type: 'add-to-cart', payload: p });
   }
 
   return (

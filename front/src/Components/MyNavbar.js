@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { storeContext } from "../storeContext";
+import { storeContext } from "../Store/storeContext";
 import { useContext } from "react";
 import { userContext } from "../userContext";
 

@@ -1,11 +1,9 @@
 import { Col, Container, Row } from "react-bootstrap";
-import { useContext, useEffect, useState } from "react";
-import { storeContext } from "../storeContext";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getOrder } from "../Services/OrderAPI";
 
 const Order = () => {
-  const store = useContext(storeContext);
   const [order, setOrder] = useState({});
   const { id } = useParams();
 

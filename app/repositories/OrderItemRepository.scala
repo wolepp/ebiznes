@@ -22,8 +22,8 @@ class OrderItemRepository @Inject() (
     def productId = column[Int]("product_id")
     def quantity  = column[Int]("quantity")
 
-    def order_fk   = foreignKey("order_fk", orderId, orderRepository.entities)(_.id)
-    def product_fk = foreignKey("product_fk", productId, productRepository.entities)(_.id)
+    def orderFk   = foreignKey("order_fk", orderId, orderRepository.entities)(_.id)
+    def productFk = foreignKey("product_fk", productId, productRepository.entities)(_.id)
 
     def * = (id.?, orderId, productId, quantity) <> ((OrderItem.apply _).tupled, OrderItem.unapply)
   }

@@ -17,7 +17,7 @@ class CategoryRepository @Inject() (dbConfigProvider: DatabaseConfigProvider)(im
     def name             = column[String]("name")
     def parentCategoryId = column[Option[Int]]("parent_category_id")
 
-    def parentCategory_fk = foreignKey("parent_category_fk", parentCategoryId, entities)(_.id)
+    def parentCategoryFk = foreignKey("parent_category_fk", parentCategoryId, entities)(_.id)
 
     def * = (id.?, name, parentCategoryId) <> ((Category.apply _).tupled, Category.unapply)
   }

@@ -5,7 +5,7 @@ import sendRequest from "../utils";
 
 const SIGNOUT_ENDPOINT = process.env.REACT_APP_API_URL + '/signOut'
 
-const Login = () => {
+const Logout = () => {
   const user = useContext(userContext);
   const history = useHistory();
 
@@ -23,4 +23,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Logout;
